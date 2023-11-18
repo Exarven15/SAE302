@@ -1,0 +1,17 @@
+{
+  "name": "v2-js",
+  "version": "1.0.0",
+  "description": "api sae302",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "author": "c'est moi wesh",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "moongose": "^1.0.0"
+  }
+}

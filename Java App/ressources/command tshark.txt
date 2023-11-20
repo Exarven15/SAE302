@@ -1,0 +1,2 @@
+tshark -T json -r "C:\Users\alexa\OneDrive\Bureau\SAE java\test.pcap" > "C:\Users\alexa\OneDrive\Bureau\SAE java\test.json"
+tshark -T json --no-duplicate-keys -r "C:\Users\alexa\OneDrive\Bureau\SAE java\test.pcap" > "C:\Users\alexa\OneDrive\Bureau\SAE java\test.json"

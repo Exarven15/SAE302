@@ -2,6 +2,9 @@
     "java.project.sourcePaths": ["src"],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
-        "lib/**/*.jar"
+        "lib/**/*.jar",
+        "json-simple-1.1.jar",
+        "json-20231013.jar",
+        "ressources/json-20231013.jar"
     ]
 }

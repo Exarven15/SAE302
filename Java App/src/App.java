@@ -1,26 +1,29 @@
 import java.io.FileReader;
-import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;  
 
 public class App {
 
-    static String fileString = "C:/Users/alexa/OneDrive/Bureau/SAE java/SAE302/Java App/ressources/test.json";
+    static String FILESTRING = "C:/Users/alexa/OneDrive/Bureau/SAE java/SAE302/Java App/ressources/ui.json";
     public static void main(String[] args) throws Exception {
 
         FileHandlerJSON file = new FileHandlerJSON();
 
-        FileReader reader = file.readerFromFile(fileString);
-        JSONObject layers = file.layersFromFile(reader);
+        FileReader reader = file.readerFromFile(FILESTRING);
+        JSONArray array = file.arrayFromFile(reader);
 
-        JSONObject frame = file.frameFromFile(layers);
-        JSONObject eth = file.ethFromFile(layers);
-        JSONObject ipv6 = file.ipv6FromFile(layers);
-        JSONObject udp = file.udpFromFile(layers);
-        JSONObject dns = file.dnsFromFile(layers);
+        Integer arraysize = file.arraySize(array);
 
-        System.out.println(frame + "\n\n------------------------------------------------------------------------------\n");
-        System.out.println(eth + "\n\n------------------------------------------------------------------------------\n");
-        System.out.println(ipv6 + "\n\n------------------------------------------------------------------------------\n");
-        System.out.println(udp + "\n\n------------------------------------------------------------------------------\n");
-        System.out.println(dns + "\n\n------------------------------------------------------------------------------\n");
+        for (Integer i = 0; i < arraysize; i++) {
+            JSONObject layers = file.layersFromFile(i, array);
+            JSONObject ipv6 = file.ipv6FromFile(layers);
+            JSONObject eth = file.ethFromFile(layers);
+            JSONObject udp = file.udpFromFile(layers);
+            JSONObject dns = file.dnsFromFile(layers);
+            file.printObject(ipv6);
+            file.printObject(eth);
+            file.printObject(udp);
+            file.printObject(dns);
+        }
     }
 }

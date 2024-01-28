@@ -1,21 +1,15 @@
-public class Udp {
-
-    String IPsrc;
-    String IPdst;
-    String MACsrc;
-    String MACdst;
+public class Udp extends Ip {
     
-    public Udp (String IPsrc, String IPdst, String MACsrc, String MACdst) {
-        this.IPsrc = IPsrc;
-        this.IPdst = IPdst;
-        this.MACsrc = MACsrc;
-        this.MACdst = MACdst;
+    String Portsrc;
+    String Portdst;
+
+    public Udp (String Portsrc, String Portdst) {
+        this.Portsrc = Portsrc;
+        this.Portdst = Portdst;
     }
 
     public Udp () {
-        this.IPsrc = "";
-        this.IPdst = "";
-        this.MACsrc = "";
-        this.MACdst = "";
-    }
+        this.Portsrc = "";
+        this.Portdst = "";
+    } 
 }

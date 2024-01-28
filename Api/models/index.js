@@ -8,5 +8,6 @@ const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
 db.udp = require("./udp.models.js")(mongoose);
+db.user = require("./user.models.js")(mongoose);
 
 module.exports = db;

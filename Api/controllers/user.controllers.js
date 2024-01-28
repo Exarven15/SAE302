@@ -25,3 +25,19 @@ exports.createUser = (req, res) => {
         });
       });
   };
+
+exports.findAllUsers = (req, res) => {
+  const login = req.query.login;
+  var condition = login ? { ipsource: { $regex: new RegExp(login), $options: "i" } } : {};
+ 
+  User.find(condition)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving users."
+      });
+    });
+  };

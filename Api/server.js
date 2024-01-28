@@ -35,6 +35,7 @@ app.get("/", (req, res) => {
 });
 
 require("./routes/udp.routes.js")(app);
+require("./routes/user.routes.js")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

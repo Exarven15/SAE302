@@ -1,7 +1,7 @@
 const db = require("../models");
 const Udp = db.udp
 
-// Create and Save a new Udp
+// Create a new Udp
 exports.createUdp = (req, res) => {
     if (!req.body.ipsource) {
       res.status(400).send({ message: "Content can not be empty!" });

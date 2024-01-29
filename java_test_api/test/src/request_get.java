@@ -3,7 +3,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class request {
+public class request_get {
     public static void main(String[] args) {
         try {
             String apiurl = "http://localhost:8080/api/user";

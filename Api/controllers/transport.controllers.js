@@ -1,33 +1,34 @@
 const db = require("../models");
-const Udp = db.udp
+const Transport = db.transport
 
 // Create a new Udp
-exports.createUdp = (req, res) => {
-    if (!req.body.ipsource) {
+exports.createTransport = (req, res) => {
+    if (!req.body.psrc) {
       res.status(400).send({ message: "Content can not be empty!" });
       return;
     }
   
-    const udp = new Udp({
-      ipsource: req.body.ipsource,
-      ipdest: req.body.ipdest,
-      frameNumber: req.body.frameNumber,
+    const transport = new Transport({
+      psrc: req.body.psrc,
+      pdest: req.body.pdest,
+      protocole: req.body.protocole,
+      paquet: req.body.paquet
     });
   
-    udp
-      .save(udp)
+    transport
+      .save(transport)
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while creating the Udp."
+            err.message || "Some error occurred while creating the transport."
         });
       });
   };
 
-exports.findAllUdp = (req, res) => {
+exports.findAllTransport = (req, res) => {
     const ipsource = req.query.ipsource;
     var condition = ipsource ? { ipsource: { $regex: new RegExp(ipsource), $options: "i" } } : {};
   
@@ -43,6 +44,7 @@ exports.findAllUdp = (req, res) => {
       });
   };
 
+/*
 exports.deleteAllUdp = (req, res) => {
     Udp.deleteMany({})
       .then(data => {
@@ -56,4 +58,4 @@ exports.deleteAllUdp = (req, res) => {
             err.message || "Some error occurred while removing all Udp."
         });
       });
-  };
+  }; */

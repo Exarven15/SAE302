@@ -1,13 +1,13 @@
 module.exports = app => {
-    const transport = require("../controllers/transport.controllers.js");
+    const dns = require("../controllers/dns.controllers.js");
   
     let router = require("express").Router();
   
-    router.post("/", transport.createTransport);
+    router.post("/", dns.createdns);
   
     //router.get("/", transport.findAlltransport);
   
     //router.delete("/", transport.deleteAllUdp);
   
-    app.use('/api/transport', router);
+    app.use('/api/dns', router);
 };

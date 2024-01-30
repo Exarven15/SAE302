@@ -4,8 +4,7 @@ module.exports = mongoose => {
       mongoose.Schema(
         {
             recherche: String,  //nom de la recherche
-            reponse: String,  // réponse serveur 
-            ipdns: Number,  // numero de la trame
+            reponse: String,  // réponse serveur
         },
         { versionKey: false }
       )

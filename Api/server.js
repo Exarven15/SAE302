@@ -34,8 +34,9 @@ app.get("/", (req, res) => {
   res.json({message: "Welcome to Wano Kuni."});
 });
 
-require("./routes/udp.routes.js")(app);
+require("./routes/transport.routes.js")(app);
 require("./routes/user.routes.js")(app);
+require("./routes/dns.routes.js")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

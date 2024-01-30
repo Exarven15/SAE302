@@ -29,6 +29,35 @@ exports.createTrame = (req, res) => {
     });
 };
 
+exports.createTrameV2 = async (req, res) => {
+      
+    const trame = new Trame({
+        date: req.body.date,  
+        intdescript: req.body.intdescript, 
+        numtrame: req.body.numtrame,
+        macsrc: req.body.macsrc,
+        macdest: req.body.macsrc, 
+        marque: req.body.marque,
+        protocole: req.body.protocole,
+        ipsrc: req.body.ipsrc,
+        ipdest: req.body.ipdest 
+    });
+  
+    const response = await trame
+      .save(trame)
+      .then(data => {
+        res.send(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while creating the Trame."
+        });
+    });
+
+    console.log()
+};
+
 /*
 
 exports.createTrame = async (req, res) => {

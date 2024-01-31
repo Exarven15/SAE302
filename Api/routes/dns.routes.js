@@ -5,9 +5,5 @@ module.exports = app => {
   
     router.post("/", dns.createdns);
   
-    //router.get("/", transport.findAlltransport);
-  
-    //router.delete("/", transport.deleteAllUdp);
-  
     app.use('/api/dns', router);
 };

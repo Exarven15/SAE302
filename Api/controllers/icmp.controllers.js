@@ -1,22 +1,22 @@
 const db = require("../models");
-const Dns = db.dns
+const Icmp = db.icmp
 const Transport = db.transport
 const Trame = db.trame
 
-exports.createdns = async (req, res) => {
+exports.createicmp = async (req, res) => {
       
-    const dns = new Dns({
-        recherche: req.body.recherche,  //nom de la recherche
-        reponse: req.body.reponse,  // réponse serveur 
+    const icmp = new Icmp({
+        numseq: req.body.numseq,  //Numéro de la séquence de ping
+        reponse: req.body.reponse,  // Temps de réponse
     });
 
     try {
-        const savedDns = await dns.save();
-        console.log(savedDns._id); // Récupérer l'id de l'objet créé
-        res.send(savedDns);
+        const savedIcmp = await icmp.save();
+        console.log(savedIcmp._id); // Récupérer l'id de l'objet créé
+        res.send(savedIcmp);
       } catch (err) {
         res.status(500).send({
-          message: err.message || "Some error occurred while creating the Dns.",
+          message: err.message || "Some error occurred while creating the Icmp.",
         });
       }
 
@@ -24,7 +24,7 @@ exports.createdns = async (req, res) => {
         psrc: req.body.psrc, //port source
         pdest: req.body.pdest, //port dest
         protocole: req.body.protocole, //protocole UDP/TCP 
-        paquet: savedDns._id // id du prochain paquet
+        paquet: savedIcmp._id // id du prochain paquet
     });
 
     try {

@@ -1,8 +1,9 @@
 const db = require("../models");
 const Transport = db.transport
+const Trame = db.trame
 
-// Create a new Udp
-exports.createTransport = (req, res) => {
+// Create a new transport
+exports.createTransport = async (req, res) => {
     if (!req.body.psrc) {
       res.status(400).send({ message: "Content can not be empty!" });
       return;
@@ -15,18 +16,42 @@ exports.createTransport = (req, res) => {
       paquet: req.body.paquet
     });
   
-    transport
-      .save(transport)
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the transport."
-        });
+    try {
+      const savedTransport = await transport.save();
+      console.log(savedTransport._id); // Récupérer l'id de l'objet créé
+      res.send(savedTransport);
+    } catch (err) {
+      res.status(500).send({
+        message: err.message || "Some error occurred while creating the Transport.",
       });
+    }
+
+    const trame = new Trame({
+      date: req.body.date, //date de la trame
+      intdescript: req.body.intdescript, // description de l'interface 
+      numtrame: req.body.numtrame,  // numero de la trame
+      macsrc: req.body.macsrc, // adresse mac source
+      macdest: req.body.macdest, // adress mac destination 
+      marque: req.body.marque, // marque de la carte réseaux
+      protocole: req.body.protocole, // protocole utilisé niveau 3 arp/ip
+      ipsrc: req.body.ipsrc, // adresse ip source 
+      ipdest: req.body.ipdest // adresse ip destination
+      
+  });
+
+  try {
+      const savedTrame = await trame.save();
+      console.log(savedTrame._id); // Récupérer l'id de l'objet créé
+      res.send(savedTrame);
+    } catch (err) {
+      res.status(500).send({
+        message: err.message || "Some error occurred while creating the Trame.",
+      });
+    }
+
   };
+
+//*
 
 exports.findAllTransport = (req, res) => {
     const ipsource = req.query.ipsource;
@@ -43,6 +68,8 @@ exports.findAllTransport = (req, res) => {
         });
       });
   };
+  
+//*/
 
 /*
 exports.deleteAllUdp = (req, res) => {

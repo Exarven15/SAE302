@@ -11,7 +11,8 @@ module.exports = mongoose => {
             marque: String, // marque de la carte réseaux
             protocole: String, // protocole utilisé niveau 3 arp/ip
             ipsrc: String, // adresse ip source 
-            ipdest: String // adresse ip destination
+            ipdest: String, // adresse ip destination
+            transid : String  // id trame transport UDP/TCP
         },
         { versionKey: false }
       )

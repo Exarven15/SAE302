@@ -5,6 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class request_post {
+
     public static void main(String[] args) {
         try {
             String apiUrl = "http://localhost:8080/api/user";
@@ -21,7 +22,8 @@ public class request_post {
             connection.setDoOutput(true);
 
             // Exemple de données JSON à envoyer avec la requête POST
-            String jsonData = "{\"login\":\"mathieu\",\"password\":\"test2\"}";
+            User user = new User("mathieu", "test2");
+            String jsonData = user.getUser();
 
             // Écrire les données dans le flux de sortie de la connexion
             try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {

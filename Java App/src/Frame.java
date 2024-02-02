@@ -15,4 +15,16 @@ public class Frame {
         this.Interface = "";
         this.Id = "";
     }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public String getInterface() {
+        return Interface;
+    }
+    
+    public String getId() {
+        return Id;
+    }
 }

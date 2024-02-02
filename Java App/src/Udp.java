@@ -1,4 +1,4 @@
-public class Udp extends Ip {
+public class Udp {
     
     String Portsrc;
     String Portdst;

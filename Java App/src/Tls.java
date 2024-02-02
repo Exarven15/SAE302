@@ -1,4 +1,4 @@
-public class Tls extends Tcp {
+public class Tls {
 
     String ContentLength;
     String ConnectionType;

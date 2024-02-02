@@ -1,4 +1,4 @@
-public class Dns extends Udp {
+public class Dns {
 
     String DNSQueryName;
     String DNSAnswerName;

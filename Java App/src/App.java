@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 public class App {
 
-    static String FILESTRING = "/home/users/etudiant/l/la112398/Téléchargements/SAE302-JAVA/Java App/ressources/ui.json";
+    static String FILESTRING = "/home/users/etudiant/l/la112398/Bureau/SAE_java/SAE302/Java App/ressources/ui.json";
     public static void main(String[] args) throws Exception {
 
         // request_post request = new request_post();
@@ -18,11 +18,16 @@ public class App {
 
         // Integer arraysize = file.arraySize(array);
 
-        JSONObject layers = file.layersFromFile(1, array);
+        JSONObject layers = file.layersFromFile(0, array);
 
-        JSONObject frame = file.frameFromFile(layers);
-        JSONObject eth = file.ethFromFile(layers);
-        file.printObject(eth);
+        Frame frame = file.getFrameData(layers);
+        Ethernet ethernet = file.getEthernetData(layers);
+        Arp arp = file.getArpData(layers);
+        Ip ip = file.getIpData(layers);
+        Tcp tcp = file.getTcpData(layers);
+        Udp udp = file.getUdpData(layers);
+
+        System.out.println(udp.Portdst);
 
         // for (Integer i = 0; i < arraysize; i++) {
         //     JSONObject layers = file.layersFromFile(i, array);

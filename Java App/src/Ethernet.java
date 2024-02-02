@@ -1,4 +1,4 @@
-public class Ethernet extends Frame {
+public class Ethernet {
 
     String MACsrc;
     String MACdst;

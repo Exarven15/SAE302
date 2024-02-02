@@ -1,4 +1,4 @@
-public class Arp extends Ethernet {
+public class Arp {
 
     String IPsrc;
     String IPdst;

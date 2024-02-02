@@ -1,4 +1,4 @@
-public class Ip extends Ethernet {
+public class Ip {
     
     String IPsrc;
     String IPdst;

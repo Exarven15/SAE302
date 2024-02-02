@@ -1,4 +1,4 @@
-public class Icmp extends Ip {
+public class Icmp {
 
     String ICMPid;
     String ICMPtime;

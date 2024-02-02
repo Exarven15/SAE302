@@ -1,4 +1,4 @@
-public class Tcp extends Ip {
+public class Tcp {
     
     String Portsrc;
     String Portdst;

@@ -28,9 +28,13 @@ public class FileHandlerJSON {
     return layers;
     }
 
-    public JSONObject frameFromFile (JSONObject layers) {
+    public Frame frameFromFile (JSONObject layers) {
         try {
         JSONObject frame = layers.getJSONObject("frame");
+        JSONObject number = frame.getJSONObject("frame.number");
+        JSONObject date = frame.getJSONObject("frame.time");
+        JSONObject frame_interface = frame.getJSONObject("frame.interface_id_tree");
+        JSONObject interface = frame_interface.getJSONObject("null");
         return frame;
         }
         catch (Exception e) {

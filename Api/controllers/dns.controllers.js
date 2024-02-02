@@ -1,62 +1,54 @@
 const db = require("../models");
-const Dns = db.dns
-const Transport = db.transport
-const Trame = db.trame
+const Dns = db.dns;
+const Transport = db.transport;
+const Trame = db.trame;
 
 exports.createdns = async (req, res) => {
-      
+  try {
+    
     const dns = new Dns({
-        recherche: req.body.recherche,  //nom de la recherche
-        reponse: req.body.reponse,  // réponse serveur 
+      recherche: req.body.recherche,
+      reponse: req.body.reponse,
     });
 
-    try {
-        const savedDns = await dns.save();
-        console.log(savedDns._id); // Récupérer l'id de l'objet créé
-        res.send(savedDns);
-      } catch (err) {
-        res.status(500).send({
-          message: err.message || "Some error occurred while creating the Dns.",
-        });
-      }
+    const savedDns = await dns.save();
+    console.log(savedDns._id);
 
+    
     const transport = new Transport({
-        psrc: req.body.psrc, //port source
-        pdest: req.body.pdest, //port dest
-        protocole: req.body.protocole, //protocole UDP/TCP 
-        paquet: savedDns._id // id du prochain paquet
+      psrc: req.body.psrc,
+      pdest: req.body.pdest,
+      protocoletrans: req.body.protocoletrans,
+      paquet: savedDns._id,
     });
 
-    try {
-        const savedTransport = await transport.save();
-        console.log(savedTransport._id); // Récupérer l'id de l'objet créé
-        res.send(savedTransport);
-      } catch (err) {
-        res.status(500).send({
-          message: err.message || "Some error occurred while creating the Transport.",
-        });
-      }
+    const savedTransport = await transport.save();
+    console.log(savedTransport._id);
 
+    
     const trame = new Trame({
-        date: req.body.date, //date de la trame
-        intdescript: req.body.intdescript, // description de l'interface 
-        numtrame: req.body.numtrame,  // numero de la trame
-        macsrc: req.body.macsrc, // adresse mac source
-        macdest: req.body.macdest, // adress mac destination 
-        marque: req.body.marque, // marque de la carte réseaux
-        protocole: req.body.protocole, // protocole utilisé niveau 3 arp/ip
-        ipsrc: req.body.ipsrc, // adresse ip source 
-        ipdest: req.body.ipdest, // adresse ip destination
-        transid: savedTransport._id // id de l'objet créé 
+      date: req.body.date,
+      intdescript: req.body.intdescript,
+      numtrame: req.body.numtrame,
+      macsrc: req.body.macsrc,
+      macdest: req.body.macdest,
+      marque: req.body.marque,
+      protocole: req.body.protocole,
+      ipsrc: req.body.ipsrc,
+      ipdest: req.body.ipdest,
+      transid: savedTransport._id,
     });
 
-    try {
-        const savedTrame = await trame.save();
-        res.send(savedTrame);
-      } catch (err) {
-        res.status(500).send({
-          message: err.message || "Some error occurred while creating the Trame.",
-        });
-      }
-  
+    const savedTrame = await trame.save();
+
+    res.json({
+      dns: savedDns,
+      transport: savedTransport,
+      trame: savedTrame,
+    });
+    
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };

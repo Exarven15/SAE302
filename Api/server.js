@@ -29,7 +29,6 @@ db.mongoose
     process.exit();
   });
 
-// simple route
 app.get("/", (req, res) => {
   res.json({message: "Welcome to Wano Kuni."});
 });
@@ -40,7 +39,6 @@ require("./routes/dns.routes.js")(app);
 require("./routes/trame.routes.js")(app);
 require("./routes/tls.routes.js")(app);
 require("./routes/icmp.routes.js")(app);
-
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

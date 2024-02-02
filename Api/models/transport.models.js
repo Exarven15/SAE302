@@ -5,7 +5,7 @@ module.exports = mongoose => {
         {
           psrc: String, //port source
           pdest: String, //port dest
-          protocole: String, //protocole UDP/TCP 
+          protocoletrans: String, //protocole UDP/TCP 
           paquet: String // id du prochain paquet
         },
         { versionKey: false }

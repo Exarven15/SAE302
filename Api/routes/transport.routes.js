@@ -5,7 +5,7 @@ module.exports = app => {
   
     router.post("/", transport.createTransport);
   
-    //router.get("/", transport.findAlltransport);
+    //router.get("/", transport.findAllTransport);
   
     //router.delete("/", transport.deleteAllUdp);
   

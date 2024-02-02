@@ -4,27 +4,16 @@ const Trame = db.trame
 
 // Create a new transport
 exports.createTransport = async (req, res) => {
-    if (!req.body.psrc) {
-      res.status(400).send({ message: "Content can not be empty!" });
-      return;
-    }
-  
+  try {
+
     const transport = new Transport({
       psrc: req.body.psrc,
       pdest: req.body.pdest,
-      protocole: req.body.protocole,
+      protocoletrans: req.body.protocole,
       paquet: req.body.paquet
     });
   
-    try {
-      const savedTransport = await transport.save();
-      console.log(savedTransport._id); // Récupérer l'id de l'objet créé
-      res.send(savedTransport);
-    } catch (err) {
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating the Transport.",
-      });
-    }
+    const savedTransport = await transport.save();
 
     const trame = new Trame({
       date: req.body.date, //date de la trame
@@ -38,20 +27,23 @@ exports.createTransport = async (req, res) => {
       ipdest: req.body.ipdest // adresse ip destination
       
   });
+  
+    const savedTrame = await trame.save();
 
-  try {
-      const savedTrame = await trame.save();
-      console.log(savedTrame._id); // Récupérer l'id de l'objet créé
-      res.send(savedTrame);
-    } catch (err) {
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating the Trame.",
-      });
-    }
+    res.json({
+      transport: savedTransport,
+      trame: savedTrame,
+  });
 
-  };
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+  
+    
+};
 
-//*
+/*
 
 exports.findAllTransport = (req, res) => {
     const ipsource = req.query.ipsource;

@@ -18,7 +18,6 @@ exports.createTrame = async (req, res) => {
   
     try {
         const savedTrame = await trame.save();
-        console.log(savedTrame._id); // Récupérer l'id de l'objet créé
         res.send(savedTrame);
       } catch (err) {
         res.status(500).send({

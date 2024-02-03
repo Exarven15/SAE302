@@ -37,3 +37,20 @@ exports.createicmp = async (req, res) => {
   }   
 
 };
+
+exports.getAllIcmp = async (req, res) => {
+  try {
+    const trames = await Trame.find().populate('transid');
+
+    // Si aucune trame n'est trouvée, renvoyez une réponse vide ou un message approprié
+    if (!trames || trames.length === 0) {
+      return res.status(404).json({ message: "Aucune trame trouvée." });
+    }
+
+    // Renvoyez la liste des trames avec les informations de transport
+    res.json(trames);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};

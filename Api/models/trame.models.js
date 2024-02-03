@@ -1,3 +1,5 @@
+const { transport } = require(".");
+
 module.exports = mongoose => {
     const Trame = mongoose.model(
       "trames",
@@ -12,7 +14,8 @@ module.exports = mongoose => {
             protocole: String, // protocole utilisé niveau 3 arp/ip
             ipsrc: String, // adresse ip source 
             ipdest: String, // adresse ip destination
-            transid : String  // id trame transport UDP/TCP
+            transid: [{type : mongoose.Schema.Types.ObjectId, ref: 'transport'}], // id du porchain paquet transport
+            icmpid: [{type : mongoose.Schema.Types.ObjectId, ref: 'icmp'}], // id du porchain paquet icmp
         },
         { versionKey: false }
       )

@@ -24,7 +24,8 @@ exports.createTransport = async (req, res) => {
       marque: req.body.marque, // marque de la carte réseaux
       protocole: req.body.protocole, // protocole utilisé niveau 3 arp/ip
       ipsrc: req.body.ipsrc, // adresse ip source 
-      ipdest: req.body.ipdest // adresse ip destination
+      ipdest: req.body.ipdest, // adresse ip destination
+      transid: savedTransport._id
       
   });
   
@@ -39,8 +40,6 @@ exports.createTransport = async (req, res) => {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
-  
-    
 };
 
 /*
@@ -62,19 +61,3 @@ exports.findAllTransport = (req, res) => {
   };
   
 //*/
-
-/*
-exports.deleteAllUdp = (req, res) => {
-    Udp.deleteMany({})
-      .then(data => {
-        res.send({
-          message: `${data.deletedCount} Udp were deleted successfully!`
-        });
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while removing all Udp."
-        });
-      });
-  }; */

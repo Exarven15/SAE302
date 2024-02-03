@@ -4,6 +4,8 @@ module.exports = app => {
     let router = require("express").Router();
   
     router.post("/", trame.createTrame);
+
+    router.get("/", trame.recupTrame)
   
     app.use('/api/trame', router);
 };

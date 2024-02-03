@@ -18,7 +18,8 @@ exports.createtls = async (req, res) => {
         psrc: req.body.psrc, //port source
         pdest: req.body.pdest, //port dest
         protocoletrans: req.body.protocole, //protocole UDP/TCP 
-        paquet: savedTls._id // id du prochain paquet
+        paquet: savedTls._id, // id du prochain paquet
+        source:"tls"
     });
 
 

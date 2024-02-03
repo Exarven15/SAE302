@@ -5,12 +5,10 @@ const Trame = db.trame
 // Create a new transport
 exports.createTransport = async (req, res) => {
   try {
-
     const transport = new Transport({
       psrc: req.body.psrc,
       pdest: req.body.pdest,
-      protocoletrans: req.body.protocole,
-      paquet: req.body.paquet
+      protocoletrans: req.body.protocoletrans,
     });
   
     const savedTransport = await transport.save();
@@ -25,7 +23,8 @@ exports.createTransport = async (req, res) => {
       protocole: req.body.protocole, // protocole utilisé niveau 3 arp/ip
       ipsrc: req.body.ipsrc, // adresse ip source 
       ipdest: req.body.ipdest, // adresse ip destination
-      transid: savedTransport._id
+      transid: savedTransport._id,
+      source: "transports"
       
   });
   
@@ -41,23 +40,3 @@ exports.createTransport = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
-
-/*
-
-exports.findAllTransport = (req, res) => {
-    const ipsource = req.query.ipsource;
-    var condition = ipsource ? { ipsource: { $regex: new RegExp(ipsource), $options: "i" } } : {};
-  
-    Udp.find(condition)
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving Udp."
-        });
-      });
-  };
-  
-//*/

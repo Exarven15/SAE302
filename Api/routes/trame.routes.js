@@ -6,6 +6,8 @@ module.exports = app => {
     router.post("/", trame.createTrame);
 
     router.get("/", trame.recupTrame)
+
+    router.delete("/", trame.deleteAlltrame)
   
     app.use('/api/trame', router);
 };

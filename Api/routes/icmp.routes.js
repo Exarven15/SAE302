@@ -5,7 +5,7 @@ module.exports = app => {
   
     router.post("/", icmp.createicmp);
 
-    router.get("/", icmp.getAllIcmp);
+    //router.get("/", icmp.getAllIcmp);
   
     app.use('/api/icmp', router);
 };

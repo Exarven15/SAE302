@@ -6,8 +6,20 @@ module.exports = mongoose => {
           psrc: String, //port source
           pdest: String, //port dest
           protocoletrans: String, //protocole UDP/TCP 
-          paquetdns: [{type : mongoose.Schema.Types.ObjectId, ref: 'dns'}], // id du prochain paquet dns
-          paquettls: [{type : mongoose.Schema.Types.ObjectId, ref: 'tls'}], // id du porchain paquet tls
+          source: String,  //Tls ou dns 
+          paquet: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: function() {
+              switch (this.source) {
+                case 'tls':
+                  return 'tls';
+                case 'dns':
+                  return 'dns';
+                default:
+                  return null;
+              }
+            }
+          }, // id du prochain paquet dns ou tls 
         },
         { versionKey: false }
       )

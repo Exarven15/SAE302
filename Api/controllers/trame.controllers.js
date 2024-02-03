@@ -48,17 +48,17 @@ exports.recupTrame = async (req, res) => {
 
 //*
 
-exports.deleteAllUdp = (req, res) => {
-    Udp.deleteMany({})
+exports.deleteAlltrame = (req, res) => {
+    Trame.deleteMany({})
       .then(data => {
         res.send({
-          message: `${data.deletedCount} Udp were deleted successfully!`
+          message: `${data.deletedCount} trame were deleted successfully!`
         });
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while removing all Udp."
+            err.message || "Some error occurred while removing all trame."
         });
       });
 };

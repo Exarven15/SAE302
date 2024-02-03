@@ -21,7 +21,8 @@ exports.createicmp = async (req, res) => {
         protocole: req.body.protocole, // protocole utilisé niveau 3 arp/ip/icmp
         ipsrc: req.body.ipsrc, // adresse ip source 
         ipdest: req.body.ipdest, // adresse ip destination
-        transid: savedIcmp._id // id de l'objet créé 
+        transid: savedIcmp._id, // id de l'objet créé
+        source: "icmp"
     });
 
     const savedTrame = await trame.save();
@@ -38,6 +39,7 @@ exports.createicmp = async (req, res) => {
 
 };
 
+/*
 exports.getAllIcmp = async (req, res) => {
   try {
     const trames = await Trame.find().populate('transid');
@@ -54,3 +56,5 @@ exports.getAllIcmp = async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+// */

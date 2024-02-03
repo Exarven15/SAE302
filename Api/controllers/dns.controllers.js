@@ -20,6 +20,7 @@ exports.createdns = async (req, res) => {
       pdest: req.body.pdest,
       protocoletrans: req.body.protocoletrans,
       paquet: savedDns._id,
+      source: "dns",
     });
 
     const savedTransport = await transport.save();

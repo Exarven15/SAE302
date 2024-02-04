@@ -7,4 +7,9 @@ public class Arp {
         this.IPsrc = IPsrc;
         this.IPdst = IPdst;
     }
+
+    public Arp () {
+        this.IPsrc = "";
+        this.IPdst = "";
+    }
 }

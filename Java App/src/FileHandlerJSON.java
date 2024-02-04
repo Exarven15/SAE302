@@ -1,4 +1,6 @@
 import java.io.FileReader;
+import java.util.Iterator;
+
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.json.JSONArray;
@@ -121,9 +123,34 @@ public class FileHandlerJSON {
     public Dns getDnsData (JSONObject layers) {
         try {
         JSONObject dns = layers.getJSONObject("dns");
-        
-        Udp udp_object = new Udp(Portsrc, Portdst);
-        return udp_object;
+        JSONObject query = dns.getJSONObject("Queries");
+        JSONObject answer = null;
+        Iterator<String> answerKeys = null;
+        String answerName = "";
+        String answerInfo = "";
+        String answerTime = "";
+        Iterator<String> queryKeys = query.keys();
+        String firstQueryKey = queryKeys.next();
+        JSONObject firstQueryObject = query.getJSONObject(firstQueryKey);
+        String queryName = firstQueryObject.getString("dns.qry.name");
+        if (dns.has("Answers")) {
+            answer = dns.getJSONObject("Answers");
+            answerKeys = answer.keys();
+            if (answerKeys.hasNext()) {
+                String firstAnswerKey = answerKeys.next();
+                JSONObject firstAnswerObject = answer.getJSONObject(firstAnswerKey);
+                answerName = firstAnswerObject.getString("dns.resp.name");
+                answerTime = dns.getString("dns.time");
+                if (firstAnswerObject.has("dns.a")) {
+                    answerInfo = firstAnswerObject.getString("dns.a");
+                }
+                else {
+                    answerInfo = firstAnswerObject.getString("dns.cname");
+                }
+            }
+        }
+        Dns dns_object = new Dns(queryName, answerName, answerInfo, answerTime);
+        return dns_object;
         }
         catch (Exception e) {
             //do nothing
@@ -131,21 +158,16 @@ public class FileHandlerJSON {
         return null;
     }
 
-    public JSONObject ipv6FromFile (JSONObject layers) {
+    public Icmp getIcmpData (JSONObject layers) {
         try {
-            JSONObject ipv6 = layers.getJSONObject("ipv6");
-            return ipv6;
+        JSONObject icmp = layers.getJSONObject("icmp");
+        String seq = icmp.getString("icmp.seq");
+        String resptime = "";
+        if (icmp.has("icmp.resptime")) {
+            resptime = icmp.getString("icmp.resptime");
         }
-        catch (Exception e){
-            // do nothing
-        }
-        return null;
-    }
-
-    public JSONObject udpFromFile (JSONObject layers) {
-        try {
-        JSONObject udp = layers.getJSONObject("udp");
-        return udp;
+        Icmp icmp_object = new Icmp(seq, resptime);
+        return icmp_object;
         }
         catch (Exception e) {
             //do nothing
@@ -153,10 +175,12 @@ public class FileHandlerJSON {
         return null;
     }
 
-    public JSONObject dnsFromFile (JSONObject layers) {
+    public Tls getTlsData (JSONObject layers) {
         try {
-        JSONObject dns = layers.getJSONObject("dns");
-        return dns;
+        JSONObject tls = layers.getJSONObject("tls");
+        JSONObject tlsRecord = tls.getJSONObject("tls.record");
+        String recordLength = tlsRecord.getString("tls.record.length");
+        return dns_object;
         }
         catch (Exception e) {
             //do nothing

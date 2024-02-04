@@ -6,26 +6,15 @@ const Trame = db.trame;
 exports.createdns = async (req, res) => {
   try {
     
-    const dns = new Dns({
-      recherche: req.body.recherche,
-      reponse: req.body.reponse,
-    });
-
-    const savedDns = await dns.save();
-    console.log(savedDns._id);
-
-    
     const transport = new Transport({
       psrc: req.body.psrc,
       pdest: req.body.pdest,
       protocoletrans: req.body.protocoletrans,
-      paquet: savedDns._id,
-      source: "dns",
+      paquet: {recherche: req.body.recherche, reponse: req.body.reponse,},
+      sources: "dns",
     });
 
     const savedTransport = await transport.save();
-    console.log(savedTransport._id);
-
     
     const trame = new Trame({
       date: req.body.date,
@@ -37,13 +26,14 @@ exports.createdns = async (req, res) => {
       protocole: req.body.protocole,
       ipsrc: req.body.ipsrc,
       ipdest: req.body.ipdest,
+      source: 'transports',
+      
       transid: savedTransport._id,
     });
 
     const savedTrame = await trame.save();
 
     res.json({
-      dns: savedDns,
       transport: savedTransport,
       trame: savedTrame,
     });

@@ -12,7 +12,7 @@ public class App {
 
         FileHandlerJSON file = new FileHandlerJSON();
 
-        request_api_dns bite = new request_api_dns();
+        request_api_icmp api = new request_api_icmp();
 
         FileReader reader = file.readerFromFile(FILESTRING);
 
@@ -20,7 +20,7 @@ public class App {
 
         // Integer arraysize = file.arraySize(array);
 
-        JSONObject layers = file.layersFromFile(1, array);
+        JSONObject layers = file.layersFromFile(267, array);
 
         // Frame frame = file.getFrameData(layers);
         // Ethernet ethernet = file.getEthernetData(layers);
@@ -34,10 +34,9 @@ public class App {
         Frame frame = file.getFrameData(layers);
         Ethernet ethernet = file.getEthernetData(layers);
         Ip ip = file.getIpData(layers);
-        Udp udp = file.getUdpData(layers);
-        Dns dns = file.getDnsData(layers);
+        Icmp icmp = file.getIcmpData(layers);
 
-        bite.main(frame.Date, frame.Interface, frame.Id, ethernet.MACsrc, ethernet.MACdst, ethernet.Brandsrc, "ip", ip.IPsrc, ip.IPdst, udp.Portsrc, udp.Portdst, "udp", dns.DNSQueryName, dns.DNSAnswerInfo);
+        api.main(frame.Date, frame.Interface, frame.Id, ethernet.MACsrc, ethernet.MACdst, ethernet.Brandsrc, "ip", ip.IPsrc, ip.IPdst, icmp.ICMPid, icmp.ICMPtime);
 
         // for (Integer i = 0; i < arraysize; i++) {
         //     JSONObject layers = file.layersFromFile(i, array);

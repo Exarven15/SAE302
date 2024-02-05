@@ -53,8 +53,20 @@ public class FileHandlerJSON {
         JSONObject brand_dst = eth.getJSONObject("eth.dst_tree");
         String MACsrc = eth.getString("eth.src");
         String MACdst = eth.getString("eth.dst");
-        String brand_name_src = brand_src.getString("eth.src.oui_resolved");
-        String brand_name_dst = brand_dst.getString("eth.dst.oui_resolved");
+        String brand_name_src = "";
+        String brand_name_dst = "";
+        if (brand_src.has("eth.src.oui_resolved")) {
+            brand_name_src = brand_src.getString("eth.src.oui_resolved");
+        }
+        else {
+            brand_name_src = brand_src.getString("eth.src_resolved");
+        }
+        if (brand_dst.has("eth.dst.oui_resolved")) {
+            brand_name_dst = brand_dst.getString("eth.dst.oui_resolved");
+        }
+        else {
+            brand_name_dst = brand_dst.getString("eth.dst_resolved");
+        }
         Ethernet ethernet_object = new Ethernet(MACsrc, MACdst, brand_name_src, brand_name_dst);
         return ethernet_object;
         }
@@ -168,19 +180,6 @@ public class FileHandlerJSON {
         }
         Icmp icmp_object = new Icmp(seq, resptime);
         return icmp_object;
-        }
-        catch (Exception e) {
-            //do nothing
-        }
-        return null;
-    }
-
-    public Tls getTlsData (JSONObject layers) {
-        try {
-        JSONObject tls = layers.getJSONObject("tls");
-        JSONObject tlsRecord = tls.getJSONObject("tls.record");
-        String recordLength = tlsRecord.getString("tls.record.length");
-        return dns_object;
         }
         catch (Exception e) {
             //do nothing

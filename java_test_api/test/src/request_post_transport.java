@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class request_post_dns {
+public class request_post_transport {
     public static void main(String[] args) {
         try {
             String apiUrl = "http://localhost:8080/api/transport";
@@ -21,7 +21,7 @@ public class request_post_dns {
             connection.setDoOutput(true);
 
             // Exemple de données JSON à envoyer avec la requête POST
-            String jsonData = "{\"psrc\":\"test\",\"pdest\":\"test2\",\"protocole\":\"test3\",\"paquet\":\"test4\",\"date\":\"test5\",\"intdescript\":\"test6\",\"numtrame\":\"test7\",\"macsrc\":\"test8\",\"macdest\":\"test9\",\"marque\":\"test10\,\"protocole\":\"test11\",\"ipsrc\":\"test12\",\"ipdest\":\"test13\",\"transid\":\"test14\"}";
+            String jsonData = "{\"psrc\":\"test\",\"pdest\":\"test2\",\"protocole\":\"test3\",\"paquet\":\"test4\",\"date\":\"test5\",\"intdescript\":\"test6\",\"numtrame\":\"test7\",\"macsrc\":\"test8\",\"macdest\":\"test9\",\"marque\":\"test10\",\"protocole\":\"test11\",\"ipsrc\":\"test12\",\"ipdest\":\"test13\",\"transid\":\"test14\"}";
 
             // Écrire les données dans le flux de sortie de la connexion
             try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {

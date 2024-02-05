@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class request_post_dns {
+public class request_post_trame {
     public static void main(String[] args) {
         try {
             String apiUrl = "http://localhost:8080/api/trame";
@@ -21,7 +21,7 @@ public class request_post_dns {
             connection.setDoOutput(true);
 
             // Exemple de données JSON à envoyer avec la requête POST
-            String jsonData = "{\"date\":\"test\",\"intdescript\":\"test2\",\"numtrame\":\"test3\",\"macsrc\":\"test4\",\"macdest\":\"test5\",\"marque\":\"test6\,\"protocole\":\"test7\",\"ipsrc\":\"test8\",\"ipdest\":\"test9\"}";
+            String jsonData = "{\"date\":\"test\",\"intdescript\":\"test2\",\"numtrame\":\"test3\",\"macsrc\":\"test4\",\"macdest\":\"test5\",\"marque\":\"test6\",\"protocole\":\"test7\",\"ipsrc\":\"test8\",\"ipdest\":\"test9\"}";
 
             // Écrire les données dans le flux de sortie de la connexion
             try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {

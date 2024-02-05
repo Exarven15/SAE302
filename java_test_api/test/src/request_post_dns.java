@@ -21,7 +21,7 @@ public class request_post_dns {
             connection.setDoOutput(true);
 
             // Exemple de données JSON à envoyer avec la requête POST
-            String jsonData = "{\"recherche\":\"test1\",\"reponse\":\"test2\",\"psrc\":\"test3\",\"pdest\":\"test4\",\"protocole\":\"test5\",\"paquet\":\"test6\",\"date\":\"test7\",\"intdescript\":\"test8\",\"numtrame\":\"test9\",\"macsrc\":\"test10\",\"macdest\":\"test11\",\"marque\":\"test12\,\"protocole\":\"test13\",\"ipsrc\":\"test14\",\"ipdest\":\"test15\",\"transid\":\"test16\"}";
+            String jsonData = "{\"recherche\":\"test1\",\"reponse\":\"test2\",\"psrc\":\"test3\",\"pdest\":\"test4\",\"protocole\":\"test5\",\"paquet\":\"test6\",\"date\":\"test7\",\"intdescript\":\"test8\",\"numtrame\":\"test9\",\"macsrc\":\"test10\",\"macdest\":\"test11\",\"marque\":\"test12\",\"protocole\":\"test13\",\"ipsrc\":\"test14\",\"ipdest\":\"test15\",\"transid\":\"test16\"}";
 
             // Écrire les données dans le flux de sortie de la connexion
             try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {

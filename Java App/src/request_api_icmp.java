@@ -3,10 +3,11 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 
 public class request_api_icmp {
 
-    public void main(String date, String intdescript, String numtrame, String macsrc, String macdest, String marque, String protocole, String ipsrc, String ipdest, String numseq, String reponse) {
+    public void main(Date date, String intdescript, String numtrame, String macsrc, String macdest, String marque, String protocole, String ipsrc, String ipdest, String numseq, String reponse) {
         try {
             String apiUrl = "http://10.3.122.100:8080/api/icmp";
 

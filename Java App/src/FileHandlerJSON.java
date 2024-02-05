@@ -1,6 +1,6 @@
 import java.io.FileReader;
 import java.util.Iterator;
-
+import java.util.Date;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.json.JSONArray;
@@ -34,9 +34,11 @@ public class FileHandlerJSON {
         try {
         JSONObject frame = layers.getJSONObject("frame");
         String number = frame.getString("frame.number");
-        String date = frame.getString("frame.time");
         JSONObject frame_interface = frame.getJSONObject("frame.interface_id_tree");
         String interface_description = frame_interface.getString("frame.interface_description");
+        Double seconds = frame.getDouble("frame.time_epoch");
+        long milliseconds = (long) (seconds * 1000);
+        Date date = new Date(milliseconds);
         Frame frame_object = new Frame(date, interface_description, number);
         return frame_object;
         }

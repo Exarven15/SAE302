@@ -45,7 +45,6 @@ exports.recupTrame = async (req, res) => {
 
 };
 
-
 //*
 
 exports.deleteAlltrame = (req, res) => {

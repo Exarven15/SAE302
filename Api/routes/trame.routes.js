@@ -1,13 +1,13 @@
-module.exports = app => {
-    const trame = require("../controllers/trame.controllers.js");
-  
-    let router = require("express").Router();
-  
-    router.post("/", trame.createTrame);
+module.exports = (app) => {
+  const trame = require("../controllers/trame.controllers.js");
 
-    router.get("/", trame.recupTrame)
+  let router = require("express").Router();
 
-    router.delete("/", trame.deleteAlltrame)
-  
-    app.use('/api/trame', router);
+  router.post("/", trame.createTrame);
+
+  router.get("/", trame.recupTrame);
+
+  router.delete("/", trame.deleteAlltrame);
+
+  app.use("/api/trame", router);
 };

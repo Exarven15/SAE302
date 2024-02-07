@@ -1,21 +1,19 @@
 const db = require("../models");
-const Dns = db.dns;
 const Transport = db.transport;
 const Trame = db.trame;
 
 exports.createdns = async (req, res) => {
   try {
-    
     const transport = new Transport({
       psrc: req.body.psrc,
       pdest: req.body.pdest,
       protocoletrans: req.body.protocoletrans,
-      paquet: {recherche: req.body.recherche, reponse: req.body.reponse,},
+      paquet: { recherche: req.body.recherche, reponse: req.body.reponse, ipreponse: req.body.ipreponse, tempsrep: req.body.tempsrep },
       sources: "dns",
     });
 
     const savedTransport = await transport.save();
-    
+
     const trame = new Trame({
       date: req.body.date,
       intdescript: req.body.intdescript,
@@ -26,8 +24,8 @@ exports.createdns = async (req, res) => {
       protocole: req.body.protocole,
       ipsrc: req.body.ipsrc,
       ipdest: req.body.ipdest,
-      source: 'transports',
-      
+      source: "transports",
+
       transid: savedTransport._id,
     });
 
@@ -37,9 +35,8 @@ exports.createdns = async (req, res) => {
       transport: savedTransport,
       trame: savedTrame,
     });
-    
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
-  }
+  }       
 };

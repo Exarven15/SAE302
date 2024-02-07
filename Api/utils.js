@@ -1,4 +1,6 @@
-const { config } = require("dotenv")
-config()
+const { config } = require("dotenv");
+config();
 
-export const { SHA256 } = process.ENV
+const SHA256 = process.env.SHA256;
+
+module.exports = { SHA256 }

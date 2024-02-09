@@ -1,10 +1,15 @@
 const db = require("../models");
 const Transport = db.transport;
 const Trame = db.trame;
+const { check } = require("./auth.controllers")
 
 exports.createtls = async (req, res) => {
   try {
-    const transport = new Transport({
+
+    const auth = await check(req.body.token)
+
+    if (auth){
+      const transport = new Transport({
       psrc: req.body.psrc, //port source
       pdest: req.body.pdest, //port dest
       protocoletrans: req.body.protocole, //protocole UDP/TCP
@@ -38,6 +43,10 @@ exports.createtls = async (req, res) => {
       transport: savedTransport,
       trame: savedTrame,
     });
+  } else {
+    return res.status(401).json({ message: "token incorect" });
+  }
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

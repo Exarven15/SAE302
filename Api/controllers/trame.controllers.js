@@ -1,12 +1,14 @@
 const db = require("../models");
 const Trame = db.trame;
+const { check } = require("./auth.controllers")
 
 // Create a new Trame
 exports.createTrame = async (req, res) => {
   try {
 
     const auth = await check(req.body.token)
-    if (!auth){
+    
+    if (auth){
       const trame = new Trame({
       date: req.body.date, //date de la trame
       intdescript: req.body.intdescript, // description de l'interface
@@ -17,12 +19,11 @@ exports.createTrame = async (req, res) => {
       protocole: req.body.protocole, // protocole utilisé niveau 3 arp/ip/icmp
       ipsrc: req.body.ipsrc, // adresse ip source
       ipdest: req.body.ipdest, // adresse ip destination
-    });
+      });
 
-    const savedTrame = await trame.save();
-
-    res.json({
-      trame: savedTrame,
+      const savedTrame = await trame.save();
+      res.json({
+        trame: savedTrame,
     });
     } else {
       return res.status(401).json({ message: "token incorect" });

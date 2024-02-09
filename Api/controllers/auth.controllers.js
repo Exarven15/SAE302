@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { SHA256 } = require("../utils");
+const db = require("../models");
 const User = db.user;
 
 exports.login = async (req, res) => {
@@ -32,11 +33,10 @@ exports.login = async (req, res) => {
   };
   
 exports.check = async (token) => {
-    const token = token 
 
     const decode = jwt.verify(token, SHA256);
-    const user = await User.findOne({ pseudo: decode.login }).lean().exec();
-
+    const user = await User.findOne({ login: decode.login }).lean().exec();
+    
     if (!user){
       return false
     } else {

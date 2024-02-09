@@ -1,10 +1,15 @@
 const db = require("../models");
 const Icmp = db.icmp;
 const Trame = db.trame;
+const { check } = require("./auth.controllers")
 
 exports.createicmp = async (req, res) => {
   try {
-    const icmp = new Icmp({
+
+    const auth = await check(req.body.token)
+
+    if (auth){
+      const icmp = new Icmp({
       numseq: req.body.numseq, //Numéro de la séquence de ping
       reponse: req.body.reponse, // Temps de réponse
     });
@@ -31,6 +36,10 @@ exports.createicmp = async (req, res) => {
       icmp: savedIcmp,
       trame: savedTrame,
     });
+  } else {
+    return res.status(401).json({ message: "token incorect" });
+  }
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });

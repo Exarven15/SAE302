@@ -8,7 +8,7 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         // request_post request = new request_post();
-        // request.main("mathieu", "test2");
+        // String token = request.main("alexandre", "lancar");
 
         FileHandlerJSON file = new FileHandlerJSON();
 
@@ -18,9 +18,11 @@ public class App {
 
         JSONArray array = file.arrayFromFile(reader);
 
+        // System.out.println(token);
+
         // Integer arraysize = file.arraySize(array);
 
-        JSONObject layers = file.layersFromFile(1, array);
+        JSONObject layers = file.layersFromFile(0, array);
 
         // Frame frame = file.getFrameData(layers);
         // Ethernet ethernet = file.getEthernetData(layers);
@@ -36,8 +38,10 @@ public class App {
         Ip ip = file.getIpData(layers);
         Udp udp = file.getUdpData(layers);
         Dns dns = file.getDnsData(layers);
+        
+        String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6ImFsZXhhbmRyZSIsImlhdCI6MTcwNzc2MjE1NywiZXhwIjoxNzA3ODQ4NTU3fQ.tqx0tVNqKaW-QqaG1u_aZV7p7A3XU1erJOiMYQ3KZE0";
 
-        api.main(frame.Date, frame.Interface, frame.Id, ethernet.MACsrc, ethernet.MACdst, ethernet.Brandsrc, "ip", ip.IPsrc, ip.IPdst, udp.Portsrc, udp.Portdst, "udp", dns.DNSQueryName, dns.DNSAnswerInfo, dns.DNSAnswerInfo, dns.DNSAnswerTime);
+        api.main(frame.Date, frame.Interface, frame.Id, ethernet.MACsrc, ethernet.MACdst, ethernet.Brandsrc, "ip", ip.IPsrc, ip.IPdst, "udp", udp.Portsrc, udp.Portdst, dns.DNSQueryName, dns.DNSAnswerName, dns.DNSAnswerInfo, dns.DNSAnswerTime, token);
 
         // for (Integer i = 0; i < arraysize; i++) {
         //     JSONObject layers = file.layersFromFile(i, array);

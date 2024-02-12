@@ -6,9 +6,9 @@ import java.net.URL;
 
 public class request_post {
 
-    public void main(String login, String password) {
+    public String main(String login, String password) throws Exception {
         try {
-            String apiUrl = "http://localhost:8080/api/user";
+            String apiUrl = "http://10.3.122.100:8080/api/auth";
 
             URL url = new URL(apiUrl);
 
@@ -42,16 +42,22 @@ public class request_post {
                         response.append(line);
                     }
 
-                    System.out.println("Réponse de l'API : " + response.toString());
+                    // Fermer la connexion
+                    connection.disconnect();
+
+                    // Retourner le token
+                    return response.toString();
                 }
             } else {
-                System.out.println("La requête a échoué avec le code : " + responseCode);
+                // Fermer la connexion
+                connection.disconnect();
+
+                // Lever une exception en cas d'échec de la requête
+                throw new Exception("La requête a échoué avec le code : " + responseCode);
             }
 
-            connection.disconnect();
-
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         }
     }
 }

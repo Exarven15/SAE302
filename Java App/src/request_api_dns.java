@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class request_api_dns {
 
-    public void main(Date date, String intdescript, String numtrame, String macsrc, String macdest, String marque, String protocole, String ipsrc, String ipdest, String protocoletrans, String psrc, String pdest, String recherche, String reponse, String ipreponse, String tempsrep) {
+    public void main(Date date, String intdescript, String numtrame, String macsrc, String macdest, String marque, String protocole, String ipsrc, String ipdest, String protocoletrans, String psrc, String pdest, String recherche, String reponse, String ipreponse, String tempsrep, String token) {
         try {
             String apiUrl = "http://10.3.122.100:8080/api/dns";
 
@@ -23,7 +23,7 @@ public class request_api_dns {
             connection.setDoOutput(true);
 
             // Exemple de données JSON à envoyer avec la requête POST
-            String jsonData = "{\"date\":\"" + date + "\",\"intdescript\":\"" + intdescript + "\",\"numtrame\":\"" + numtrame + "\",\"macsrc\":\"" + macsrc + "\",\"macdest\":\"" + macdest + "\",\"marque\":\"" + marque + "\",\"ipsrc\":\"" + ipsrc + "\",\"ipdest\":\"" + ipdest + "\",\"protocole\":\"" + protocole + "\",\"psrc\":\"" + psrc + "\",\"pdest\":\"" + pdest + "\",\"recherche\":\"" + recherche + "\",\"reponse\":\"" + reponse + "\",\"ipreponse\":\"" + ipreponse + "\",\"tempsrep\":\"" + tempsrep + "\"}";
+            String jsonData = "{\"date\":\"" + date + "\",\"intdescript\":\"" + intdescript + "\",\"numtrame\":\"" + numtrame + "\",\"macsrc\":\"" + macsrc + "\",\"macdest\":\"" + macdest + "\",\"marque\":\"" + marque + "\",\"ipsrc\":\"" + ipsrc + "\",\"ipdest\":\"" + ipdest + "\",\"protocole\":\"" + protocole + "\",\"psrc\":\"" + psrc + "\",\"pdest\":\"" + pdest + "\",\"recherche\":\"" + recherche + "\",\"reponse\":\"" + reponse + "\",\"ipreponse\":\"" + ipreponse + "\",\"tempsrep\":\"" + tempsrep + "\",\"token\":\"" + token + "\"}";
 
             // Écrire les données dans le flux de sortie de la connexion
             try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {

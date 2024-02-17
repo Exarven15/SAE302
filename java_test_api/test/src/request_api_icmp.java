@@ -3,12 +3,13 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 
-public class request_post {
+public class request_api_icmp {
 
-    public static void main(String[] args) {
+    public void main(Date date, String intdescript, String numtrame, String macsrc, String macdest, String marque, String protocole, String ipsrc, String ipdest, String numseq, String reponse, String token) {
         try {
-            String apiUrl = "http://localhost:8080/api/user";
+            String apiUrl = "http://10.3.122.100:8080/api/icmp";
 
             URL url = new URL(apiUrl);
 
@@ -22,8 +23,7 @@ public class request_post {
             connection.setDoOutput(true);
 
             // Exemple de données JSON à envoyer avec la requête POST
-            User user = new User("mathieu", "test2");
-            String jsonData = user.getUser();
+            String jsonData = "{\"date\":\"" + date + "\",\"intdescript\":\"" + intdescript + "\",\"numtrame\":\"" + numtrame + "\",\"macsrc\":\"" + macsrc + "\",\"macdest\":\"" + macdest + "\",\"marque\":\"" + marque + "\",\"ipsrc\":\"" + ipsrc + "\",\"ipdest\":\"" + ipdest + "\",\"protocole\":\"" + protocole + "\",\"numseq\":\"" + numseq + "\",\"reponse\":\"" + reponse + "\",\"token\":\"" + token + "\"}";
 
             // Écrire les données dans le flux de sortie de la connexion
             try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {

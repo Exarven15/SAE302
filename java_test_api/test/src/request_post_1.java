@@ -4,10 +4,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class request_post_dns {
-    public static void main(String[] args) {
+public class request_post {
+
+    public String main(String login, String password) throws Exception {
         try {
-            String apiUrl = "http://localhost:8080/api/icmp";
+            String apiUrl = "http://10.3.122.100:8080/api/auth";
 
             URL url = new URL(apiUrl);
 
@@ -21,7 +22,7 @@ public class request_post_dns {
             connection.setDoOutput(true);
 
             // Exemple de données JSON à envoyer avec la requête POST
-            String jsonData = "{\"numseq\":\"test1\",\"reponse\":\"test2\",\"psrc\":\"test3\",\"pdest\":\"test4\",\"protocole\":\"test5\",\"paquet\":\"test6\",\"date\":\"test7\",\"intdescript\":\"test8\",\"numtrame\":\"test9\",\"macsrc\":\"test10\",\"macdest\":\"test11\",\"marque\":\"test12\,\"protocole\":\"test13\",\"ipsrc\":\"test14\",\"ipdest\":\"test15\",\"transid\":\"test16\"}";
+            String jsonData = "{\"login\":\"" + login + "\",\"password\":\"" + password + "\"}";
 
             // Écrire les données dans le flux de sortie de la connexion
             try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
@@ -41,16 +42,22 @@ public class request_post_dns {
                         response.append(line);
                     }
 
-                    System.out.println("Réponse de l'API : " + response.toString());
+                    // Fermer la connexion
+                    connection.disconnect();
+
+                    // Retourner le token
+                    return response.toString();
                 }
             } else {
-                System.out.println("La requête a échoué avec le code : " + responseCode);
+                // Fermer la connexion
+                connection.disconnect();
+
+                // Lever une exception en cas d'échec de la requête
+                throw new Exception("La requête a échoué avec le code : " + responseCode);
             }
 
-            connection.disconnect();
-
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e;
         }
     }
 }

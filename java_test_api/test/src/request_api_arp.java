@@ -3,11 +3,13 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 
-public class request_post_dns {
-    public static void main(String[] args) {
+public class request_api_arp {
+
+    public void main(Date date, String intdescript, String numtrame, String macsrc, String macdest, String marque, String protocole, String ipsrc, String ipdest, String token) {
         try {
-            String apiUrl = "http://localhost:8080/api/dns";
+            String apiUrl = "http://10.3.122.100:8080/api/trame";
 
             URL url = new URL(apiUrl);
 
@@ -21,7 +23,7 @@ public class request_post_dns {
             connection.setDoOutput(true);
 
             // Exemple de données JSON à envoyer avec la requête POST
-            String jsonData = "{\"recherche\":\"test1\",\"reponse\":\"test2\",\"psrc\":\"test3\",\"pdest\":\"test4\",\"protocole\":\"test5\",\"paquet\":\"test6\",\"date\":\"test7\",\"intdescript\":\"test8\",\"numtrame\":\"test9\",\"macsrc\":\"test10\",\"macdest\":\"test11\",\"marque\":\"test12\,\"protocole\":\"test13\",\"ipsrc\":\"test14\",\"ipdest\":\"test15\",\"transid\":\"test16\"}";
+            String jsonData = "{\"date\":\"" + date + "\",\"intdescript\":\"" + intdescript + "\",\"numtrame\":\"" + numtrame + "\",\"macsrc\":\"" + macsrc + "\",\"macdest\":\"" + macdest + "\",\"marque\":\"" + marque + "\",\"ipsrc\":\"" + ipsrc + "\",\"ipdest\":\"" + ipdest + "\",\"protocole\":\"" + protocole + "\",\"token\":\"" + token + "\"}";
 
             // Écrire les données dans le flux de sortie de la connexion
             try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {

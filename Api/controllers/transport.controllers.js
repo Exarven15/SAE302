@@ -1,88 +1,49 @@
 const db = require("../models");
-const Transport = db.transport
-const Trame = db.trame
+const Transport = db.transport;
+const Trame = db.trame;
+const { check } = require("./auth.controllers")
 
 // Create a new transport
 exports.createTransport = async (req, res) => {
-    if (!req.body.psrc) {
-      res.status(400).send({ message: "Content can not be empty!" });
-      return;
-    }
-  
-    const transport = new Transport({
+  try {
+
+    const auth = await check(req.body.token)
+
+    if (auth){
+      const transport = new Transport({
       psrc: req.body.psrc,
       pdest: req.body.pdest,
-      protocole: req.body.protocole,
-      paquet: req.body.paquet
-    });
-  
-    try {
-      const savedTransport = await transport.save();
-      console.log(savedTransport._id); // Récupérer l'id de l'objet créé
-      res.send(savedTransport);
-    } catch (err) {
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating the Transport.",
+      protocoletrans: req.body.protocoletrans,
       });
-    }
 
-    const trame = new Trame({
+      const savedTransport = await transport.save();
+
+      const trame = new Trame({
       date: req.body.date, //date de la trame
-      intdescript: req.body.intdescript, // description de l'interface 
-      numtrame: req.body.numtrame,  // numero de la trame
+      intdescript: req.body.intdescript, // description de l'interface
+      numtrame: req.body.numtrame, // numero de la trame
       macsrc: req.body.macsrc, // adresse mac source
-      macdest: req.body.macdest, // adress mac destination 
+      macdest: req.body.macdest, // adress mac destination
       marque: req.body.marque, // marque de la carte réseaux
       protocole: req.body.protocole, // protocole utilisé niveau 3 arp/ip
-      ipsrc: req.body.ipsrc, // adresse ip source 
-      ipdest: req.body.ipdest // adresse ip destination
-      
-  });
-
-  try {
-      const savedTrame = await trame.save();
-      console.log(savedTrame._id); // Récupérer l'id de l'objet créé
-      res.send(savedTrame);
-    } catch (err) {
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating the Trame.",
+      ipsrc: req.body.ipsrc, // adresse ip source
+      ipdest: req.body.ipdest, // adresse ip destination
+      transid: savedTransport._id,
+      source: "transports",
       });
+
+      const savedTrame = await trame.save();
+
+      res.json({
+        transport: savedTransport,
+        trame: savedTrame,
+      });
+    } else {
+      return res.status(401).json({ message: "token incorect" });
     }
 
-  };
-
-//*
-
-exports.findAllTransport = (req, res) => {
-    const ipsource = req.query.ipsource;
-    var condition = ipsource ? { ipsource: { $regex: new RegExp(ipsource), $options: "i" } } : {};
-  
-    Udp.find(condition)
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving Udp."
-        });
-      });
-  };
-  
-//*/
-
-/*
-exports.deleteAllUdp = (req, res) => {
-    Udp.deleteMany({})
-      .then(data => {
-        res.send({
-          message: `${data.deletedCount} Udp were deleted successfully!`
-        });
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while removing all Udp."
-        });
-      });
-  }; */
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};

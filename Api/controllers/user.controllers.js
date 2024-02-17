@@ -1,43 +1,22 @@
 const db = require("../models");
-const User= db.user
+const User = db.user;
+const bcrypt = require("bcrypt");
 
 // create a new login and password
-exports.createUser = (req, res) => {
-    if (!req.body.login || !req.body.password) {
-      res.status(400).send({ message: "Need a login and password !"});
-      return;
-    }
-  
-    const user = new User({
-      password: req.body.password,
-      login: req.body.login
-    });
-  
-    user
-      .save(user)
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while creating the new user."
-        });
-      });
-  };
+exports.createUser = async (req, res) => {
+  const user = new User({
+    password: req.body.password,
+    login: req.body.login,
+  });
 
-exports.findAllUsers = (req, res) => {
-  const login = req.query.login;
-  var condition = login ? { ipsource: { $regex: new RegExp(login), $options: "i" } } : {};
- 
-  User.find(condition)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving users."
-      });
+  user.password = await bcrypt.hash(user.password, 10);
+
+  try {
+    const savedUser = await user.save();
+    res.send(savedUser);
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || "Some error occurred while creating the Trame.",
     });
-  };
+  }
+};

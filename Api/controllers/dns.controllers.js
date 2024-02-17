@@ -1,62 +1,52 @@
 const db = require("../models");
-const Dns = db.dns
-const Transport = db.transport
-const Trame = db.trame
+const Transport = db.transport;
+const Trame = db.trame;
+const { check } = require("./auth.controllers")
 
 exports.createdns = async (req, res) => {
+  try {
+
+    const auth = await check(req.body.token)
+
+    if (auth){
+      const transport = new Transport({
+        psrc: req.body.psrc,
+        pdest: req.body.pdest,
+        protocoletrans: req.body.protocoletrans,
+        paquet: { recherche: req.body.recherche, reponse: req.body.reponse, ipreponse: req.body.ipreponse, tempsrep: req.body.tempsrep },
+        sources: "dns",
+      });
+
+      const savedTransport = await transport.save();
+
+      const trame = new Trame({
+        date: req.body.date,
+        intdescript: req.body.intdescript,
+        numtrame: req.body.numtrame,
+        macsrc: req.body.macsrc,
+        macdest: req.body.macdest,
+        marque: req.body.marque,
+        protocole: req.body.protocole,
+        ipsrc: req.body.ipsrc,
+        ipdest: req.body.ipdest,
+        source: "transports",
+
+        transid: savedTransport._id,
+      });
+
+      const savedTrame = await trame.save();
+
+      res.json({
+        transport: savedTransport,
+        trame: savedTrame,
+      });
+    } else {
+      return res.status(401).json({ message: "token incorect" });
+    }
+
       
-    const dns = new Dns({
-        recherche: req.body.recherche,  //nom de la recherche
-        reponse: req.body.reponse,  // réponse serveur 
-    });
-
-    try {
-        const savedDns = await dns.save();
-        console.log(savedDns._id); // Récupérer l'id de l'objet créé
-        res.send(savedDns);
-      } catch (err) {
-        res.status(500).send({
-          message: err.message || "Some error occurred while creating the Dns.",
-        });
-      }
-
-    const transport = new Transport({
-        psrc: req.body.psrc, //port source
-        pdest: req.body.pdest, //port dest
-        protocole: req.body.protocole, //protocole UDP/TCP 
-        paquet: savedDns._id // id du prochain paquet
-    });
-
-    try {
-        const savedTransport = await transport.save();
-        console.log(savedTransport._id); // Récupérer l'id de l'objet créé
-        res.send(savedTransport);
-      } catch (err) {
-        res.status(500).send({
-          message: err.message || "Some error occurred while creating the Transport.",
-        });
-      }
-
-    const trame = new Trame({
-        date: req.body.date, //date de la trame
-        intdescript: req.body.intdescript, // description de l'interface 
-        numtrame: req.body.numtrame,  // numero de la trame
-        macsrc: req.body.macsrc, // adresse mac source
-        macdest: req.body.macdest, // adress mac destination 
-        marque: req.body.marque, // marque de la carte réseaux
-        protocole: req.body.protocole, // protocole utilisé niveau 3 arp/ip
-        ipsrc: req.body.ipsrc, // adresse ip source 
-        ipdest: req.body.ipdest, // adresse ip destination
-        transid: savedTransport._id // id de l'objet créé 
-    });
-
-    try {
-        const savedTrame = await trame.save();
-        res.send(savedTrame);
-      } catch (err) {
-        res.status(500).send({
-          message: err.message || "Some error occurred while creating the Trame.",
-        });
-      }
-  
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }       
 };

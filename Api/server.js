@@ -1,10 +1,11 @@
 const express = require("express");
 const cors = require("cors");
+const { IP } = require("./utils");
 
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8081",
+  origin: `http://${IP}:8081`,
 };
 
 app.use(cors(corsOptions));
@@ -30,7 +31,7 @@ db.mongoose
   });
 
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Wano Kuni." });
+  res.json({ message: " 'Like I always say, can't find a door ? make your own.' Edward Elric" });
 });
 
 require("./routes/transport.routes.js")(app);

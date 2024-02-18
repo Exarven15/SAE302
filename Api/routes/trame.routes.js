@@ -3,11 +3,11 @@ module.exports = (app) => {
 
   let router = require("express").Router();
 
-  router.post("/", trame.createTrame);
+  router.post("/arp", trame.createTrame);
 
-  router.get("/", trame.recupTrame);
+  router.get("/trame", trame.recupTrame);
 
-  router.delete("/", trame.deleteAlltrame);
+  router.delete("/arp", trame.deleteAlltrame);
 
-  app.use("/api/trame", router);
+  app.use("/api/", router);
 };

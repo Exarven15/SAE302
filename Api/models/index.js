@@ -1,4 +1,4 @@
-const dbConfig = require("../config/db.config.js");
+const { URI } = require("../utils");
 
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
@@ -6,7 +6,7 @@ mongoose.set("strictQuery", false);
 
 const db = {};
 db.mongoose = mongoose;
-db.url = dbConfig.url;
+db.url = URI;
 db.transport = require("./transport.models.js")(mongoose);
 db.user = require("./user.models.js")(mongoose);
 db.trame = require("./trame.models.js")(mongoose);

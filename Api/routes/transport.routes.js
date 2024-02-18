@@ -9,5 +9,5 @@ module.exports = (app) => {
 
   //router.delete("/", transport.deleteAllUdp);
 
-  app.use("/api/transport", router);
+  app.use("/api/tcp", router);
 };

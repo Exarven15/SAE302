@@ -12,12 +12,12 @@ la doc a été écrite en testant sur une vm : OracleLinux-R8-U8-x86_64-dvd.iso 
 - language -> support
 - software selection -> minimal install 
 - network -> On 
-- set password admin
-- create a Api User
+- definir un mot de passe admin
+- créer un utilisateur
   
 ## Installation
 
-```
+``` bash
 su - 
 yum update
 yum install git
@@ -34,7 +34,7 @@ Copier la clé ssh créé
 Aller sur le liens suivant : https://github.com/settings/keys
 Et rentrer la clé ssh 
 
-```
+``` bash
 git clone git@github.com:Exarven15/SAE302.git
 cd SAE302/
 git checkout Api
@@ -48,7 +48,7 @@ npm install
 
 Pour utiliser l'api il configurer la base mongodb installé précedement. 
 
-```
+``` bash
 mongosh
 use SAE302
 db.createUser({user: "test",pwd: "test",roles: ["readWrite", "dbAdmin"]})
@@ -66,10 +66,10 @@ créer un fichier .env et ajouter les chaamps suivant :
   
 exemple de .env
 
-```
+``` js
 SHA256=928adb212d325e10e8360cae95e9a3718e84b628a98fc77a61c4538f6b53b78e
 URI="mongodb://test:test@localhost:27017/SAE302"
-IP=
+IP=127.0.0.1
 ```
 
 l'exemple est utilisable si le User a bien été definit comme test:test
@@ -84,7 +84,7 @@ npm est le gestionnaire de paquets par défaut pour js. Ce dernier permet de lan
 
 pour lancer avec npm on execute la commande : 
 
-```
+``` bash
 npm run start
 ```
 
@@ -94,7 +94,11 @@ PM2 est un gestionnaire de processus pour le runtime js. Ce dernier permet de la
 
 pour utiliser pm2 :
 
-```
+``` bash
 npm install pm2 -g
 pm2 start server.js
 ```
+
+## Test system 
+
+La procédure de test système est détaillé dans le Read.me du dossier test_API

@@ -8,9 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public class GetAPI {
     private static final String BASE_URL = "http://10.3.122.100:8080"; // Remplace avec l'URL de ton API
-
     private static Retrofit retrofit = null;
-
     public static Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()

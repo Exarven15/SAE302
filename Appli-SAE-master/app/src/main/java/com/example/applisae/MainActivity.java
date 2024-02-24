@@ -13,7 +13,6 @@ import android.widget.Button;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 import android.util.Log;
 import android.widget.ListView;
 
@@ -68,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Intent i = new Intent(com.example.applisae.MainActivity.this, MainActivity2.class);
+
+                startActivity(i);
+            }
+        });
+        buttonFavoris.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent i = new Intent(com.example.applisae.MainActivity.this, MainActivity3.class);
 
                 startActivity(i);
             }

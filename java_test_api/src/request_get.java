@@ -6,7 +6,7 @@ import java.net.URL;
 public class request_get {
     public static void main(String[] args) {
         try {
-            String apiurl = "http://localhost:8080/api/trame";
+            String apiurl = "http://10.3.122.100:8080:8080/api/trame";
 
             URL url = new URL(apiurl);
 

@@ -3,13 +3,12 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Date;
 
-public class request_api_arp {
+public class request_api_login {
 
-    public void main(Date date, String intdescript, String numtrame, String macsrc, String macdest, String marque, String protocole, String ipsrc, String ipdest, String token) {
+    public void main(String login, String password) {
         try {
-            String apiUrl = "http://10.3.122.100:8080/api/arp";
+            String apiUrl = "http://10.3.122.100:8080/api/auth";
 
             URL url = new URL(apiUrl);
 
@@ -23,7 +22,7 @@ public class request_api_arp {
             connection.setDoOutput(true);
 
             // Exemple de données JSON à envoyer avec la requête POST
-            String jsonData = "{\"date\":\"" + date + "\",\"intdescript\":\"" + intdescript + "\",\"numtrame\":\"" + numtrame + "\",\"macsrc\":\"" + macsrc + "\",\"macdest\":\"" + macdest + "\",\"marque\":\"" + marque + "\",\"ipsrc\":\"" + ipsrc + "\",\"ipdest\":\"" + ipdest + "\",\"protocole\":\"" + protocole + "\",\"token\":\"" + token + "\"}";
+            String jsonData = "{\"login\":\"" + login + "\",\"password\":\"" + password + "\"}";
 
             // Écrire les données dans le flux de sortie de la connexion
             try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {

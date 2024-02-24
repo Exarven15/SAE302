@@ -9,7 +9,7 @@ public class request_api_tcp {
 
     public void main(Date date, String intdescript, String numtrame, String macsrc, String macdest, String marque, String protocole, String ipsrc, String ipdest, String psrc, String pdest, String token) {
         try {
-            String apiUrl = "http://10.3.122.100:8080/api/transport";
+            String apiUrl = "http://10.3.122.100:8080/api/tcp";
 
             URL url = new URL(apiUrl);
 

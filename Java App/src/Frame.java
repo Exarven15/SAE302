@@ -17,16 +17,4 @@ public class Frame {
         this.Interface = "";
         this.Id = "";
     }
-
-    public Date getDate() {
-        return Date;
-    }
-
-    public String getInterface() {
-        return Interface;
-    }
-    
-    public String getId() {
-        return Id;
-    }
 }

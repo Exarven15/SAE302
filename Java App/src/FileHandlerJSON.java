@@ -193,4 +193,10 @@ public class FileHandlerJSON {
         Integer size = array.length();
         return size; 
     }
+
+    public String packetType (JSONObject layers) {
+        JSONObject frame = layers.getJSONObject("frame");
+        String protocols = frame.getString("frame.protocols");
+        return protocols;
+    }
 }

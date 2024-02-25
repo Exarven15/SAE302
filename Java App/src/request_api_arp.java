@@ -9,7 +9,7 @@ public class request_api_arp {
 
     public void main(Date date, String intdescript, String numtrame, String macsrc, String macdest, String marque, String protocole, String ipsrc, String ipdest, String token) {
         try {
-            String apiUrl = "http://10.3.122.100:8080/api/trame";
+            String apiUrl = "http://10.3.122.100:8080/api/arp";
 
             URL url = new URL(apiUrl);
 

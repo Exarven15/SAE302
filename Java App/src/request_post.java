@@ -3,10 +3,11 @@ import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import org.json.JSONObject;
 
 public class request_post {
 
-    public String main(String login, String password) throws Exception {
+    public JSONObject main(String login, String password) throws Exception {
         try {
             String apiUrl = "http://10.3.122.100:8080/api/auth";
 
@@ -42,11 +43,14 @@ public class request_post {
                         response.append(line);
                     }
 
+                    // Convertir la réponse en JSONObject
+                    JSONObject jsonResponse = new JSONObject(response.toString());
+
                     // Fermer la connexion
                     connection.disconnect();
 
-                    // Retourner le token
-                    return response.toString();
+                    // Retourner le JSONObject
+                    return jsonResponse;
                 }
             } else {
                 // Fermer la connexion

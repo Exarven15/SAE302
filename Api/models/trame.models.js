@@ -4,6 +4,7 @@ module.exports = (mongoose) => {
     mongoose.Schema(
       {
         date: String, //date de la trame
+        type: String,
         intdescript: String, // description de l'interface
         numtrame: Number, // numero de la trame
         macsrc: String, // adresse mac source

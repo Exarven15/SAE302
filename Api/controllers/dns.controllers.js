@@ -21,6 +21,7 @@ exports.createdns = async (req, res) => {
 
       const trame = new Trame({
         date: req.body.date,
+        type: "dns",
         intdescript: req.body.intdescript,
         numtrame: req.body.numtrame,
         macsrc: req.body.macsrc,

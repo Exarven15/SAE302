@@ -18,6 +18,7 @@ exports.createicmp = async (req, res) => {
 
     const trame = new Trame({
       date: req.body.date, //date de la trame
+      type: "icmp",
       intdescript: req.body.intdescript, // description de l'interface
       numtrame: req.body.numtrame, // numero de la trame
       macsrc: req.body.macsrc, // adresse mac source

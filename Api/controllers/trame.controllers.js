@@ -11,6 +11,7 @@ exports.createTrame = async (req, res) => {
     if (auth){
       const trame = new Trame({
       date: req.body.date, //date de la trame
+      type: "arp",
       intdescript: req.body.intdescript, // description de l'interface
       numtrame: req.body.numtrame, // numero de la trame
       macsrc: req.body.macsrc, // adresse mac source

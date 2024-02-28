@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.view.View;
 
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 
@@ -91,7 +92,22 @@ public class MainActivity extends AppCompatActivity {
 
         // Lie l'adaptateur à la ListView
         listView.setAdapter(adapter);
+        // Set item click listener
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Get the selected item
+                Item selectedItem = (Item) parent.getItemAtPosition(position);
+
+                // Create and show the dialog with the details of the selected item
+                ItemDialog itemDialog = new ItemDialog(MainActivity.this, findViewById(R.id.dialog_item_layout), listView, selectedItem);
+                itemDialog.show();
+                listView.setVisibility(View.INVISIBLE);
+            }
+        });
     }
+
+
 
     @Override
     public <T extends View> T findViewById(int id) {

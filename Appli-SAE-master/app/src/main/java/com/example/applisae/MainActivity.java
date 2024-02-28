@@ -100,9 +100,8 @@ public class MainActivity extends AppCompatActivity {
                 Item selectedItem = (Item) parent.getItemAtPosition(position);
 
                 // Create and show the dialog with the details of the selected item
-                ItemDialog itemDialog = new ItemDialog(MainActivity.this, findViewById(R.id.dialog_item_layout), listView, selectedItem);
+                ItemDialog itemDialog = new ItemDialog(MainActivity.this, selectedItem);
                 itemDialog.show();
-                listView.setVisibility(View.INVISIBLE);
             }
         });
     }

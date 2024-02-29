@@ -17,6 +17,8 @@ import retrofit2.Response;
 import android.util.Log;
 import android.widget.ListView;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,8 +51,9 @@ public class MainActivity extends AppCompatActivity {
                     List<Item> data = response.body();
                     // Fais quelque chose avec les données récupérées
                     Log.d(TAG, "Data received: " + data.toString());
-                    if (data.size() > 10){ //Vérifie si le nombre de données est supérieur à 10
-                        List<Item> limitdata = data.subList(Math.max(0,data.size())-10, data.size()); // Si oui on envoie que les 10 dernières
+                    if (data.size() > 4){ //Vérifie si le nombre de données est supérieur à 4
+                        Collections.reverse(data);
+                        List<Item> limitdata = data.subList(0, Math.min(4, data.size())) ;// Si oui on envoie que les 4 dernières
                         displayDataInListView(limitdata);
                     }
                     else {

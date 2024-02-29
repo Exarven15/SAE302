@@ -18,8 +18,10 @@
         android:text="Capture"
         app:layout_constraintBottom_toBottomOf="@+id/Favoris"
         app:layout_constraintEnd_toStartOf="@+id/Favoris"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/Favoris"
@@ -34,11 +36,11 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="303dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="25dp"
-        android:text="Capture récentes :"
+        android:layout_width="369dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:text="Capture récentes (4 dernières):"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Capture" />

@@ -2,6 +2,8 @@ package com.example.applisae;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 public class Item{
 
     @SerializedName("itemName")
@@ -35,32 +37,60 @@ public class Item{
         this.itemDescription = itemDescription;
     }
 
-    private String _id, date, intdescript, macsrc, macdest, marque, protocole, ipsrc, ipdest, source,psrc,pdest,sources,recherche,reponse,ipreponse,tempsrep;
+    private String _id, date, intdescript, macsrc, macdest, marque, protocole, ipsrc, ipdest, source,psrc,pdest,sources,recherche,reponse,ipreponse,tempsrep,type;
     private Number numtrame;
 
     public String toString() {
         // Personnalise la représentation textuelle de l'objet
-        return "Item{id='" + _id +
-                "', date='" + date +
-                "', intdescript='" + intdescript +
-                "', numtrame=" + numtrame +
-                "', macsrc=" + macsrc +
-                "', macdest=" + macdest +
-                "', marque=" + marque +
-                "', protocole=" + protocole +
-                "', ipsrc=" + ipsrc +
-                "', ipdest=" + ipdest +
-                "', source=" + source +
-                "', psrc=" + psrc +
-                "', pdest=" + pdest +
-                "', sources=" + sources +
-                "', recherche=" + recherche +
-                "', reponse=" + reponse +
-                "', ipreponse=" + ipreponse +
-                "', tempsrep=" + tempsrep
-                /* Ajoute d'autres propriétés ici */ + '}';
 
-
+        if (Objects.equals(type, "dns")){
+            return "Item{id='" + _id +
+                    "', date='" + date +
+                    "', intdescript='" + intdescript +
+                    "', numtrame=" + numtrame +
+                    "', macsrc=" + macsrc +
+                    "', macdest=" + macdest +
+                    "', marque=" + marque +
+                    "', protocole=" + protocole +
+                    "', ipsrc=" + ipsrc +
+                    "', ipdest=" + ipdest +
+                    "', source=" + source +
+                    "', psrc=" + psrc +
+                    "', pdest=" + pdest +
+                    "', sources=" + sources +
+                    "', recherche=" + recherche +
+                    "', reponse=" + reponse +
+                    "', ipreponse=" + ipreponse +
+                    "', tempsrep=" + tempsrep + '}';
+        } else if (Objects.equals(type, "icmp")) {
+            return "Item{id='" + _id +
+                    "', date='" + date +
+                    "', intdescript='" + intdescript +
+                    "', numtrame=" + numtrame +
+                    "', macsrc=" + macsrc +
+                    "', macdest=" + macdest +
+                    "', marque=" + marque +
+                    "', protocole=" + protocole +
+                    "', ipsrc=" + ipsrc +
+                    "', ipdest=" + ipdest +
+                    "', source=" + source +
+                    "', reponse=" + reponse + '}';
+        } else if (Objects.equals(type, "tcp")) {
+            return "Item{id='" + _id +
+                    "', date='" + date +
+                    "', intdescript='" + intdescript +
+                    "', numtrame=" + numtrame +
+                    "', macsrc=" + macsrc +
+                    "', macdest=" + macdest +
+                    "', marque=" + marque +
+                    "', protocole=" + protocole +
+                    "', ipsrc=" + ipsrc +
+                    "', ipdest=" + ipdest +
+                    "', source=" + source +
+                    "', psrc=" + psrc +
+                    "', pdest=" + pdest + '}';
+        }
+        return null;
     }
 
     // D'autres méthodes, si nécessaire

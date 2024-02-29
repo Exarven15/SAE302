@@ -44,51 +44,54 @@ public class Item{
         // Personnalise la représentation textuelle de l'objet
 
         if (Objects.equals(type, "dns")){
-            return "Item{id='" + _id +
-                    "', date='" + date +
-                    "', intdescript='" + intdescript +
-                    "', numtrame=" + numtrame +
-                    "', macsrc=" + macsrc +
-                    "', macdest=" + macdest +
-                    "', marque=" + marque +
-                    "', protocole=" + protocole +
-                    "', ipsrc=" + ipsrc +
-                    "', ipdest=" + ipdest +
-                    "', source=" + source +
-                    "', psrc=" + psrc +
-                    "', pdest=" + pdest +
-                    "', sources=" + sources +
-                    "', recherche=" + recherche +
-                    "', reponse=" + reponse +
-                    "', ipreponse=" + ipreponse +
-                    "', tempsrep=" + tempsrep + '}';
+            return "Type de trame : '" + type +
+                    "', \nid='" + _id +
+                    "', \ndate='" + date +
+                    "', \nintdescript='" + intdescript +
+                    "', \nnumtrame=" + numtrame +
+                    "', \nmacsrc=" + macsrc +
+                    "', \nmacdest=" + macdest +
+                    "', \nmarque=" + marque +
+                    "', \nprotocole=" + protocole +
+                    "', \nipsrc=" + ipsrc +
+                    "', \nipdest=" + ipdest +
+                    "', \nsource=" + source +
+                    "', \npsrc=" + psrc +
+                    "', \npdest=" + pdest +
+                    "', \nsources=" + sources +
+                    "', \nrecherche=" + recherche +
+                    "', \nreponse=" + reponse +
+                    "', \nipreponse=" + ipreponse +
+                    "', \ntempsrep=" + tempsrep + '}';
         } else if (Objects.equals(type, "icmp")) {
-            return "Item{id='" + _id +
-                    "', date='" + date +
-                    "', intdescript='" + intdescript +
-                    "', numtrame=" + numtrame +
-                    "', macsrc=" + macsrc +
-                    "', macdest=" + macdest +
-                    "', marque=" + marque +
-                    "', protocole=" + protocole +
-                    "', ipsrc=" + ipsrc +
-                    "', ipdest=" + ipdest +
-                    "', source=" + source +
-                    "', reponse=" + reponse + '}';
+            return  "Type de trame : '" + type +
+                    "', \nid='" + _id +
+                    "', \ndate='" + date +
+                    "', \nintdescript='" + intdescript +
+                    "', \nnumtrame=" + numtrame +
+                    "', \nmacsrc=" + macsrc +
+                    "', \nmacdest=" + macdest +
+                    "', \nmarque=" + marque +
+                    "', \nprotocole=" + protocole +
+                    "', \nipsrc=" + ipsrc +
+                    "', \nipdest=" + ipdest +
+                    "', \nsource=" + source +
+                    "', \nreponse=" + reponse + '}';
         } else if (Objects.equals(type, "tcp")) {
-            return "Item{id='" + _id +
-                    "', date='" + date +
-                    "', intdescript='" + intdescript +
-                    "', numtrame=" + numtrame +
-                    "', macsrc=" + macsrc +
-                    "', macdest=" + macdest +
-                    "', marque=" + marque +
-                    "', protocole=" + protocole +
-                    "', ipsrc=" + ipsrc +
-                    "', ipdest=" + ipdest +
-                    "', source=" + source +
-                    "', psrc=" + psrc +
-                    "', pdest=" + pdest + '}';
+            return  "Type de trame : '" + type +
+                    "', \nid='" + _id +
+                    "', \ndate='" + date +
+                    "', \nintdescript='" + intdescript +
+                    "', \nnumtrame=" + numtrame +
+                    "', \nmacsrc=" + macsrc +
+                    "', \nmacdest=" + macdest +
+                    "', \nmarque=" + marque +
+                    "', \nprotocole=" + protocole +
+                    "', \nipsrc=" + ipsrc +
+                    "', \nipdest=" + ipdest +
+                    "', \nsource=" + source +
+                    "', \npsrc=" + psrc +
+                    "', \npdest=" + pdest + '}';
         }
         return null;
     }

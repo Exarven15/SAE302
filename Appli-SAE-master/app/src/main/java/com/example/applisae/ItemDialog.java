@@ -21,17 +21,13 @@ public class ItemDialog extends Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Utilise le layout défini dans activity_main.xml
         setContentView(R.layout.dialog_layout);
-
-        // Obtient les références aux éléments du layout
 
         TextView txtItemDetails = findViewById(R.id.ItemDetail);
         Button btnCloseDialog = findViewById(R.id.btnCloseDialog);
 
         txtItemDetails.setText(selectedItem.toString());
 
-        // Ajoute des actions si nécessaire
         btnCloseDialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

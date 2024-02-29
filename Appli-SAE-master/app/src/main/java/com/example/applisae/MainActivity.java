@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     // Traitement des données réussi
                     List<Item> data = response.body();
-                    // Fais quelque chose avec les données récupérées
                     Log.d(TAG, "Data received: " + data.toString());
                     if (data.size() > 4){ //Vérifie si le nombre de données est supérieur à 4
                         Collections.reverse(data);

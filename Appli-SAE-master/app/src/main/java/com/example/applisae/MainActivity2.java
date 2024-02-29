@@ -46,7 +46,6 @@ public class MainActivity2 extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     // Traitement des données réussi
                     List<Item> data = response.body();
-                    // Fais quelque chose avec les données récupérées
                     Log.d(TAG, "Data received: " + data.toString());
                     displayDataInListView(data);
                 } else {

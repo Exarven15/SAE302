@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -15,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,20 +29,19 @@ import retrofit2.Response;
 
 public class MainActivity2 extends AppCompatActivity {
 
-
     private Button buttonHome;
-    private Button buttonFavoris;
+    private Spinner filterSpinner;
     private ArrayAdapter<Item> adapter;
+    private List<Item> originalData;
 
-
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
         buttonHome = findViewById(R.id.home);
-        buttonFavoris = findViewById(R.id.Favoris);
-
+        filterSpinner = findViewById(R.id.filter_spinner);
 
         // Obtient une instance de l'interface ApiService à partir de GetAPI
         ApiService apiService = GetAPI.getApiService();
@@ -52,10 +53,10 @@ public class MainActivity2 extends AppCompatActivity {
             public void onResponse(Call<List<Item>> call, Response<List<Item>> response) {
                 if (response.isSuccessful()) {
                     // Traitement des données réussi
-                    List<Item> data = response.body();
-                    Log.d(TAG, "Data received: " + data.toString());
-                    displayDataInListView(data);
-
+                    originalData = response.body();
+                    Log.d(TAG, "Data received: " + originalData.toString());
+                    displayDataInListView(originalData);
+                    setupSpinner();
                 } else {
                     // Traitement des erreurs (code d'erreur HTTP non 2xx)
                     Log.e(TAG, "Error: " + response.message());
@@ -69,35 +70,55 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
 
-
         buttonHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 Intent i = new Intent(com.example.applisae.MainActivity2.this, MainActivity.class);
-
                 startActivity(i);
             }
         });
-        buttonFavoris.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                Intent i = new Intent(com.example.applisae.MainActivity2.this, MainActivity3.class);
-
-                startActivity(i);
-            }
-        });
-
     }
 
+    private void setupSpinner() {
+        // Créez un ArrayAdapter à partir des options de filtres et liez-le au Spinner
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.filter_op, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        filterSpinner.setAdapter(spinnerAdapter);
+
+        // Ajoutez un écouteur d'événements pour le Spinner
+        filterSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // Filter the data based on the selected option
+                String selectedItem = (String) parent.getItemAtPosition(position);
+                List<Item> filteredData = filterData(selectedItem);
+                adapter.clear();
+                adapter.addAll(filteredData);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Do nothing
+            }
+        });
+    }
+
+    private List<Item> filterData(String filterOption) {
+        // Filter the original data based on the selected option
+        List<Item> filteredData = new ArrayList<>();
+        for (Item item : originalData) {
+            // Modify this condition as per your filtering requirement
+            if (item.getType().equals(filterOption)) {
+                filteredData.add(item);
+            }
+        }
+        return filteredData;
+    }
 
     private void displayDataInListView(List<Item> dataList) {
-
         ListView listView = findViewById(R.id.capturerecente);
-
-        // Crée un adaptateur personnalisé pour lier les données à la ListView
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dataList);
-
-        // Lie l'adaptateur à la ListView
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

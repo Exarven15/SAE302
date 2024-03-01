@@ -25,7 +25,6 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     private Button buttonCaptures;
-    private Button buttonFavoris;
 
     // TAG utilisé pour les logs, généralement défini comme le nom de la classe
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         buttonCaptures = findViewById(R.id.Capture);
-        buttonFavoris = findViewById(R.id.Favoris);
+
 
         // Obtient une instance de l'interface ApiService à partir de GetAPI
         ApiService apiService = GetAPI.getApiService();
@@ -81,14 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        buttonFavoris.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                Intent i = new Intent(com.example.applisae.MainActivity.this, MainActivity3.class);
 
-                startActivity(i);
-            }
-        });
 
     }
 

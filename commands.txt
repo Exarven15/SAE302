@@ -1,3 +1,0 @@
-In Java App folder :
-
-java -cp bin:ressources/json-20231013.jar App

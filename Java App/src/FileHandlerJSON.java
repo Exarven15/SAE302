@@ -5,8 +5,10 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.json.JSONArray;
 
+// Class for handling JSON files and extracting packet information
 public class FileHandlerJSON {
     
+    // Method to create a FileReader from a file path
     public FileReader readerFromFile (String file) {
         try {
             FileReader reader = new FileReader(file);
@@ -18,11 +20,13 @@ public class FileHandlerJSON {
         return null;
     }
 
+    // Method to create a JSONArray from a FileReader
     public JSONArray arrayFromFile (FileReader reader) {
         JSONArray array = new JSONArray(new JSONTokener(reader));
         return array;
     }
 
+    // Method to extract layers JSONObject from JSONArray based on index
     public JSONObject layersFromFile (Integer objectint, JSONArray array) {
         JSONObject data = array.getJSONObject(objectint);
         JSONObject source = data.getJSONObject("_source");
@@ -30,6 +34,7 @@ public class FileHandlerJSON {
     return layers;
     }
 
+    // Method to extract Frame data from layers JSONObject
     public Frame getFrameData (JSONObject layers) {
         try {
         JSONObject frame = layers.getJSONObject("frame");
@@ -47,7 +52,8 @@ public class FileHandlerJSON {
         }
         return null;
     }
-
+    
+    // Method to extract Ethernet data from layers JSONObject
     public Ethernet getEthernetData (JSONObject layers) {
         try {
         JSONObject eth = layers.getJSONObject("eth");
@@ -78,6 +84,7 @@ public class FileHandlerJSON {
         return null;
     }
 
+    // Method to extract Arp data from layers JSONObject
     public Arp getArpData (JSONObject layers) {
         try {
         JSONObject arp = layers.getJSONObject("arp");
@@ -92,6 +99,7 @@ public class FileHandlerJSON {
         return null;
     }
 
+    // Method to extract Ip data from layers JSONObject
     public Ip getIpData (JSONObject layers) {
         try {
         JSONObject ip = layers.getJSONObject("ip");
@@ -106,6 +114,7 @@ public class FileHandlerJSON {
         return null;
     }
 
+    // Method to extract Tcp data from layers JSONObject
     public Tcp getTcpData (JSONObject layers) {
         try {
         JSONObject tcp = layers.getJSONObject("tcp");
@@ -120,6 +129,7 @@ public class FileHandlerJSON {
         return null;
     }
 
+    // Method to extract Udp data from layers JSONObject
     public Udp getUdpData (JSONObject layers) {
         try {
         JSONObject udp = layers.getJSONObject("udp");
@@ -133,7 +143,8 @@ public class FileHandlerJSON {
         }
         return null;
     }
-
+    
+    // Method to extract Dns data from layers JSONObject
     public Dns getDnsData (JSONObject layers) {
         try {
         JSONObject dns = layers.getJSONObject("dns");
@@ -172,6 +183,7 @@ public class FileHandlerJSON {
         return null;
     }
 
+    // Method to extract Icmp data from layers JSONObject
     public Icmp getIcmpData (JSONObject layers) {
         try {
         JSONObject icmp = layers.getJSONObject("icmp");
@@ -189,11 +201,13 @@ public class FileHandlerJSON {
         return null;
     }
 
+    // Method to get the size of the JSONArray
     public Integer arraySize (JSONArray array) {
         Integer size = array.length();
         return size; 
     }
 
+    // Method to get the packet type from layers JSONObject
     public String packetType (JSONObject layers) {
         JSONObject frame = layers.getJSONObject("frame");
         String protocols = frame.getString("frame.protocols");

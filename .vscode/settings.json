@@ -1,6 +1,11 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "Java App/ressources/json-20231013.jar"
+        "Java App/ressources/json-20231013.jar",
+        "SAE302.jar"
+    ],
+    "java.project.sourcePaths": [
+        "Java App\\ressources",
+        "Java App\\src"
     ]
 }

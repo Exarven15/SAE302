@@ -3,13 +3,48 @@ import org.json.JSONArray;
 import org.json.JSONObject;  
 
 public class App {
-
-    static String FILESTRING = "C:/Users/alexa/OneDrive/Bureau/SAE java/SAE302/Java App/ressources/ui.json";
+    
     public static void main(String[] args) throws Exception {
+
+        if (args.length == 0 || args[0].equals("help")) {
+            printHelp();
+            return;
+        }
+        else {
+            switch (args[0]) {
+
+                case "createuser":
+                    try {
+                        request_api_create_user request = new request_api_create_user();
+                        request.main(args[1], args[2]);
+                    }
+                    catch (Exception e) {
+                        System.out.println("An error as occured, make sure to give a login and a password");
+                    }
+                    break;
+                
+                case "sendpackets":
+                    try {
+                        sendPackets(args[1], args[2], args[3]);
+                    }
+                    catch (Exception e) {
+                            System.out.println("An error as occured, make sure you have an account with 'createuser', and that you gave a valid filepath with login and password");
+                    }
+                    break;
+            
+                default:
+                    System.out.println("An error as occured, please check with the argument help how to use the program");
+                    break;
+            }
+            return;
+        }
+    }
+
+    public static void sendPackets (String FILESTRING, String login, String password) throws Exception {
 
         request_post request = new request_post();
 
-        JSONObject token = request.main("alexandre", "lancar");
+        JSONObject token = request.main(login, password);
 
         String tokensString = token.getString("token");
 
@@ -81,5 +116,12 @@ public class App {
                     break;
             }
         }
+    }
+
+    private static void printHelp () {
+        System.out.println("Usage:");
+        System.out.println("java App help                                : Display this help message");
+        System.out.println("java App createuser login password           : Create a user with specified login and password");
+        System.out.println("java App sendpackets filepath login password : Run with specified filepath, login, and password");
     }
 }

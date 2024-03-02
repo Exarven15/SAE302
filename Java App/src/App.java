@@ -127,8 +127,8 @@ public class App {
     // Method to print help message
     private static void printHelp() {
         System.out.println("Usage:");
-        System.out.println("java App help                                : Display this help message");
-        System.out.println("java App createuser login password           : Create a user with specified login and password");
-        System.out.println("java App sendpackets filepath login password : Run with specified filepath, login, and password");
+        System.out.println("java -jar PacketA.jar help                                : Display this help message");
+        System.out.println("java -jar PacketA.jar createuser login password           : Create a user with specified login and password");
+        System.out.println("java -jar PacketA.jar sendpackets filepath login password : Run with specified filepath, login, and password");
     }
 }

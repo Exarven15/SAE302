@@ -63,10 +63,6 @@ public class Item{
         }
         return null;
     }
-    public String getType() {
-        return type;
-    }
-
 
     // D'autres méthodes, si nécessaire
 }

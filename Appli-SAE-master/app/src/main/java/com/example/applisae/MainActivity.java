@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
         buttonCaptures = findViewById(R.id.Capture);
 
-
         // Obtient une instance de l'interface ApiService à partir de GetAPI
         ApiService apiService = GetAPI.getApiService();
 

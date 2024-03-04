@@ -1,0 +1,5 @@
+Commandes à utiliser afin de faire une capture Wireshark, puis de l'exporter en json en ligne de commandes :
+
+- tshark -i [interface réseau] -w [chemin_fichier_destination.pcap]
+
+- tshark -T json --no-duplicate-keys -r [chemin_fichier.pcap] > [chemin_fichier.json]

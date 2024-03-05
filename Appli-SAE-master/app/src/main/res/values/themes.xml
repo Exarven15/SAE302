@@ -3,7 +3,10 @@
     <style name="Base.Theme.AppliSAE" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/lightblue</item>
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
-    <style name="Theme.AppliSAE" parent="Base.Theme.AppliSAE" />
+    <style name="Theme.AppliSAE" parent="Base.Theme.AppliSAE"/>
+
 </resources>

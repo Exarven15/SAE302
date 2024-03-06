@@ -1,18 +1,13 @@
-## Getting Started
+# Partie Java de la SAE302
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## Info utiles
 
-## Folder Structure
+* Toutes les consignes d'utilisation du programme (PacketA.jar) sont stipulées dans le programme lui même en le lançant : ```java -jar PacketA.jar```
 
-The workspace contains two folders by default, where:
+## Modification de l'adresse IP vers l'API
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+* S'il est nécessaire d'utiliser une API à une adresse différente que celle stipulé dans le code (VM de l'IUT), il sera nécessaire de modifier l'IP se trouvant dans tous les fichiers du projets commançant par "request" dans le dossier "Java App/src/"
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+## Recréation du .jar après modification (s'il y a eu modification)
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+* Depuis Visual Studio Code, il est possible d'exporter le projet Java en .jar afin de recréer un .jar avec les modifications effectuées (changement de l'IP de l'API par exemple)

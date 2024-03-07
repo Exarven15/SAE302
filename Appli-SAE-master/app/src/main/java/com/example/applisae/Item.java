@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class Item{
 
-    private String _id, date, intdescript, macsrc, macdest, marque, protocole, ipsrc, ipdest, source, type;
+    private String _id, date, intdescript, macsrc, macdest, marque, protocole, ipsrc, ipdest, source, psrc,pdest,sources,recherche,reponse,ipreponse,tempsrep,type;
     private Number numtrame;
 
     public String toString() {
